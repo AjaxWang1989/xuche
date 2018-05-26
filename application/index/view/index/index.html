@@ -1,0 +1,187 @@
+{layout name="layout/layout" /}
+{if condition="isset($img) && count($img) > 0"}
+<div class="banner-box" id="show-nav">
+
+	<!--banner-->
+
+	<div id="carousel-example-generic" class="carousel slide banner" data-ride="carousel">
+
+		<!-- Indicators -->
+
+		<ol class="carousel-indicators">
+			{foreach $img as $k=>$v}
+			<li data-target="#carousel-example-generic" data-slide-to="{$k}" class="{if condition=" $k==0 "}active{/if}"></li>
+			{/foreach}
+
+		</ol>
+
+		<!-- Wrapper for slides -->
+
+		<div class="carousel-inner" role="listbox">
+			{foreach $img as $k=>$v}
+			<div class="item {if condition=" $k==0 "}active{/if}"><img src="{$v.img}" class="img-responsive" alt=""></div>
+			{/foreach}
+
+		</div>
+
+	</div>
+</div>
+{/if}
+<div class="service" style="height:550px;">
+	<div class="titlebox">
+		<h3>我们的服务</h3>
+	</div>
+	<!--pc端-->
+	<div class="servicebox" >
+
+		<div id="menu-wrapper">
+			<div style="width:850px;margin: 0 auto;">
+<ul class="menu_se">
+	{foreach $cate as $k=>$v}
+	{if $v.nc}
+	<li>
+		<a href="javascript:;" class="{if condition=" $k==0 "}selected{/if}">{$v.name}<br><span></span></a>
+	</li>
+	{/if}
+	{/foreach}
+</ul>
+</div>
+
+</div>
+<div id="submenu-wrapper" style="height:280px;">
+	{foreach $cate as $k=>$v}
+	{if $v.nc}
+	<div class="submenu submenu1" style="width:100%;text-align:center;height:280px;{if condition=" $k==0 "}display:block{else/}display:none{/if}">
+<div style="margin:0 auto;width:1270px">
+{foreach $v.nc as $key=>$value}
+{if condition="$key < 4"}
+<div class="zhucelistbox" style="margin:0 auto;height:280px;">
+	<div class="zcbox" style="height:280px;">
+		<i class="{$value.icon}" style="font-size:60px;color:#055bc3"></i>
+		<a href="{:url('/index/index/info/id/'.$value.id)}"><span> <h2>{$value.name}</h2></span></a>
+		<p style="">{$value.description ? $value.description : $site.description}</p>
+		<!-- <p>
+			<a href="" target="_blank" class="zxzx">在线咨询</a>
+			<a href="" class="lzbl">立即办理</a>
+		</p> -->
+	</div>
+</div>
+{/if}
+{/foreach}
+</div>
+</div>
+{/if}
+{/foreach}
+
+</div>
+
+</div>
+</div>
+<script type="text/javascript" src="/assets/p/lanrenzhijia.js"></script>
+
+<style>
+.zx-img{float:left}
+</style>
+<div class="aboutNews">
+	<div class="titlebox">
+		<h3>行业资讯</h3>
+	</div>
+	<!--pc端-->
+	<div class="ck-slide">
+		<div class="ck-slide-dir">
+			<ul class="ck-slide-wrapper" style="">
+{foreach $news as $k=>$v}
+<li style="float: left; position: relative; margin-left: 0px;">
+<dl class="newsdl">
+	{foreach $v as $value}
+	<dd>
+		<div class="zx-img"><img style="width:85px;height:85px" src="{$value.image}"></div>
+		<div class="xqbox">
+			<a href="/index/index/detail/id/{$value.id}">
+				<h3>{$value.title}</h3>
+				<p>{:mb_substr($value.description,0,30,'utf8')}...</p>
+			</a>
+		</div>
+	</dd>
+	{/foreach}
+</dl>
+</li>
+{/foreach}
+</ul>
+</div>
+<div class="ck-slidebox" style="margin-left: -51px;">
+<div class="slideWrap">
+	<ul class="dot-wrap">
+		{for start="1" end="$newsCount"}
+				<li class=""><em>{$i}</em></li>
+		{/for}
+	</ul>
+</div>
+</div>
+</div>
+
+
+</div>
+<script src="/assets/p/slide1.js"></script>
+<script>
+								$('.ck-slide').ckSlide({
+									autoPlay: true,
+									dir: 'x',
+									interval: 5000
+								});
+							</script>
+<!--合作客户-->
+<div class="in_kehu">
+	<div class="titlebox">
+		<h3>成功案例</h3>
+	</div>
+	<div class="section clients fp-section fp-table active" data-anchor="page4" style="height: 317px;">
+<div class="fp-tableCell" style="height: 270px;">
+<div class="box" style="background:#fff">
+	<ul class="items list-inline">
+		{foreach $customer as $v}
+		<li style="width:140px;height:130px">
+			<div><a href="{$v.url}" target="_blank"><img style="width:138px;height:110px" src="{$v.img}"></a></div>
+			<div style="height:28px;font-size:12px;text-align:center">{$v.name}</div>
+		</li>
+		{/foreach}
+	</ul>
+</div>
+</div>
+</div>
+</div>
+
+<!--金牌服务-->
+
+<div class="jpservice">
+	<dl>
+		<dt><img src="/assets/p/ser01.png"></dt>
+		<dd>
+			<h3>低价透明</h3>
+			<p>统一报价，无隐形消费</p>
+		</dd>
+	</dl>
+	<dl class="seconddl">
+		<dt><img src="/assets/p/ser02.png"></dt>
+		<dd>
+			<h3>金牌服务</h3>
+			<p>一对一专属顾问7*24小时金牌服务</p>
+		</dd>
+	</dl>
+	<dl class="threedl">
+		<dt><img src="/assets/p/ser03.png"></dt>
+		<dd>
+			<h3>信息保密</h3>
+			<p>个人信息安全有保障</p>
+		</dd>
+	</dl>
+	<dl class="lastdl">
+		<dt><img src="/assets/p/ser04.png"></dt>
+		<dd>
+			<h3>售后无忧</h3>
+			<p>服务出问题客服经理全程跟进</p>
+		</dd>
+	</dl>
+</div>
+
+<!--联系我们-->

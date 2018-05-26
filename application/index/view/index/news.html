@@ -1,0 +1,85 @@
+{layout name="layout/layout" /}
+{if condition="isset($img) && count($img) > 0"}
+<div class="banner-box" id="show-nav">
+
+	<!--banner-->
+
+	<div id="carousel-example-generic" class="carousel slide banner" data-ride="carousel">
+
+		<!-- Indicators -->
+
+		<ol class="carousel-indicators">
+			{foreach $img as $k=>$v}
+			<li data-target="#carousel-example-generic" data-slide-to="{$k}" class="{if condition=" $k==0 "}active{/if}"></li>
+			{/foreach}
+
+		</ol>
+
+		<!-- Wrapper for slides -->
+
+		<div class="carousel-inner" role="listbox">
+			{foreach $img as $k=>$v}
+			<div class="item {if condition=" $k==0 "}active{/if}"><img src="{$v.img}" class="img-responsive" alt=""></div>
+			{/foreach}
+
+		</div>
+
+	</div>
+	</div>
+{/if}
+<!--子页主体-->
+<div class="content">
+			<div class="nav_nei zhuce_box">
+			<div class="nav_nei2">
+				<a href="/">首页</a> &gt;<a href="/index/index/news/id/{$cateOne.id}">{$cateOne.name}</a>
+			</div>
+			<div class="share">
+			</div>
+		</div>
+	<div class="content_Left">
+		<div class="tabbox">
+			<div class="newsbox">
+				<ul>
+					{foreach $lists as $v}
+					<li>
+						<div class="newsImg">
+							<a href="/index/index/detail/id/{$v.id}"><img src="{$v.image}"></a>
+						</div>
+						<div class="newsRight">
+							<a href="/index/index/detail/id/{$v.id}"> {$v.title} </a>
+							<p> {:mb_substr($v.description,0,70,'utf8')}...</p>
+							<div class="link">
+								<a href="/index/index/detail/id/{$v.id}" class="ckgd">查看更多</a>
+								<span class="question">{$v.category.name}</span>
+								<span class="stars">{$v.views}</span>
+								<span class="date2">{:substr($v.publishtime,0,10)}</span>
+							</div>
+						</div>
+					</li>
+					{/foreach}
+				</ul>
+
+				<!--page 分页-->
+					{$page}
+
+
+			</div>
+		</div>
+	</div>
+
+	<div class="content_right">
+		<div class="rightTab">
+			<div class="RTop">
+				<span class="onstop">最新发布</span>
+			</div>
+			<div class="Rbox" style="display: block;">
+<ul>
+	{foreach $newList as $k=>$v}
+	<li><i>0{$k+1}</i><a href="/index/index/detail/id/{$v.id}">{:mb_substr($v.title,0,11,'utf8')}</a><span>{:substr($v.publishtime,0,10)}</span></li>
+	{/foreach}
+</ul>
+</div>
+</div>
+</div>
+
+</div>

@@ -1,0 +1,115 @@
+
+{layout name="layout/layout" /}
+{if condition="isset($img) && count($img) > 0"}
+<div class="banner-box" id="show-nav">
+
+	<!--banner-->
+
+	<div id="carousel-example-generic" class="carousel slide banner" data-ride="carousel">
+
+		<!-- Indicators -->
+
+		<ol class="carousel-indicators">
+			{foreach $img as $k=>$v}
+			<li data-target="#carousel-example-generic" data-slide-to="{$k}" class="{if condition=" $k==0 "}active{/if}"></li>
+			{/foreach}
+
+		</ol>
+
+		<!-- Wrapper for slides -->
+
+		<div class="carousel-inner" role="listbox">
+			{foreach $img as $k=>$v}
+			<div class="item {if condition=" $k==0 "}active{/if}"><img src="{$v.img}" class="img-responsive" alt=""></div>
+			{/foreach}
+
+		</div>
+
+	</div>
+	</div>
+{/if}
+<!--子页主体-->
+<style>
+.next-cate a{display: inline-block;height:30px;line-height:30px; font-size: 14px;padding:2px;margin-right: 10px}
+</style>
+<!--子页主体-->
+<div class="contentbox">
+	<div class="content">
+		<div class="nav_nei zhuce_box">
+		<div class="nav_nei2">
+			<a href="/">首页</a> &gt;<a href="javascript:;">{$detail.name}</a>
+		</div>
+		<div class="share">
+		</div>
+	</div>
+		<!--left-->
+		<div class="contactLeft">
+			<ul>
+				{foreach $blCate as $v}
+				<li>
+					<a class="{if condition='$v.id == $detail.id'}visitedA{/if}" href="{:url('/index/index/info/id/'.$v.id)}">{$v.name}</a>
+				</li>
+				{/foreach}
+			</ul>
+		</div>
+		<!--right-->
+		<div class="contactRight">
+			<div class="conBox">
+				<h3 class="topCon">{$detail.name}</h3>
+				<div class="textBox" style="padding:15px 0">
+					{$detail.info}
+					<div class="next-cate"
+					{if condition="!empty($detail.info) && count($nextCate) > 0"}
+						style="border-top:1px solid #007cc6;margin-top:30px"
+						{/if}
+						>
+					{foreach $nextCate as $v}
+						<a href="{:url('/index/index/info/id/'.$v.id)}">
+							{$v.name}
+						</a>
+					{/foreach}
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+</div>
+
+
+<!--联系我们-->
+
+<!--金牌服务-->
+
+<div class="jpservice">
+	<dl>
+		<dt><img src="/assets/p/ser01.png" data-bd-imgshare-binded="1"></dt>
+		<dd>
+			<h3>低价透明</h3>
+			<p>统一报价，无隐形消费</p>
+		</dd>
+	</dl>
+	<dl class="seconddl">
+		<dt><img src="/assets/p/ser02.png" data-bd-imgshare-binded="1"></dt>
+		<dd>
+			<h3>金牌服务</h3>
+			<p>一对一专属顾问7*24小时金牌服务</p>
+		</dd>
+	</dl>
+	<dl class="threedl">
+		<dt><img src="/assets/p/ser03.png" data-bd-imgshare-binded="1"></dt>
+		<dd>
+			<h3>信息保密</h3>
+			<p>个人信息安全有保障</p>
+		</dd>
+	</dl>
+	<dl class="lastdl">
+		<dt><img src="/assets/p/ser04.png" data-bd-imgshare-binded="1"></dt>
+		<dd>
+			<h3>售后无忧</h3>
+			<p>服务出问题客服经理全程跟进</p>
+		</dd>
+	</dl>
+</div>

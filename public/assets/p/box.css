@@ -1,0 +1,10 @@
+﻿.img-replace {display: inline-block;overflow: hidden;text-indent: 100%;color: transparent;white-space: nowrap;}
+.cd-popup {position: fixed;left: 0;top: 0;height: 100%;width: 100%;background:url(../img/zxBg.png) repeat;z-index: 200000;opacity: 1;
+-webkit-transition: opacity 0.3s 0s, visibility 0s 0.3s;-moz-transition: opacity 0.3s 0s, visibility 0s 0.3s;
+transition: opacity 0.3s 0s, visibility 0s 0.3s;}
+.cd-popup-container{width: 400px; height: 250px; background:url(../img/tckBg.png) no-repeat center top; border-radius: 10px; position: absolute; left: 50%; top: 50%; margin-left: -200px; margin-top: -125px;}
+.bl{padding: 20px;}
+#J_con_box{font-size: 16px; color:#666; line-height: 66px; text-align: center; margin: 66px auto 38px;}
+#J_ok_btn{width: 120px; height: 32px;  margin: 0 auto;display: block; text-align: center; font-size: 14px; border-radius: 5px; line-height: 32px; color: #FFF;}
+/*弹出层*/
+.getceng-box{width: 580px;height: 460px;text-align: center;margin-top: 100px;}

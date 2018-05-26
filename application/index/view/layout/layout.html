@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<title>{$stitle ? $stitle : $site.name}</title>
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=9">
+	<link rel="stylesheet" href="/assets/p/bootstrap.min.css">
+	<link rel="stylesheet" href="/assets/p/index.css">
+	<link rel="stylesheet" href="/assets/p/news.css">
+	<link rel="stylesheet" href="/assets/p/wj.css">
+	<link rel="stylesheet" href="/assets/libs/font-awesome/css/font-awesome.min.css">
+	<script type="text/javascript" src="/assets/p/jquery.min.js"></script>
+	<script type="text/javascript" src="/assets/p/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/assets/p/mainNav.js"></script>
+	<!--[if lt IE 9]>
+    	<script type="text/javascript" src="/js/html5shiv.min.js"></script>
+    	<script type="text/javascript" src="/js/respond.min.js"></script>
+    	<![endif]-->
+</head>
+
+<body>
+	<div id="other-nav">
+		<div id="continer">
+
+			<!-- 顶部信息条 -->
+			<div class="top-box">
+				<div class="box-con">
+					<div class="left-box">
+					</div>
+					<div class="right-box">
+
+						<span class="wxgzh"><a href="javascript:void(0);"><i></i>微信公众号<b class="v-wx">
+							<img src="{$site.wechat}" style="width:120px;height:120px" data-bd-imgshare-binded="1"></b></a></span>
+
+						<span class="call-on">
+				                <a href="/index/index/info/id/114.html"><i></i>联系我们</a>
+				                <div class="contact-box">
+				                    <p class="tel-box">
+				                        <i class="city">咨询电话</i>
+				                        <i class="tel">{$site.tel}</i>
+				                    </p>
+				                    <p class="tel-box">
+				                        <i class="city">手机</i>
+				                        <i class="tel">{$site.mobile}</i>
+				                    </p>
+				                </div>
+                			</span>
+					</div>
+				</div>
+
+			</div>
+
+			<!-- 导航 -->
+			<!-- logo区域 -->
+			<!-- 普通的logo区域 -->
+			<div class="logo-box">
+				<a href="/" class="logo" title="">
+					<h1><img src="{$site.logo}" alt="" style="width:240px;height:70px"></h1>
+				</a>
+				<span class="telphone"></span>
+
+			</div>
+
+			<div id="show-nav">
+				<!-- 导航 -->
+				<div class="nav-box">
+					<div class="box-con">
+						<!-- 全部分类 -->
+						<div class="n-left"><span class="qbfl">全部分类</span>
+							<div class="banner-nav" style="width:240px;">
+								<div class="left-nav">
+									<dl>
+										{foreach $cate as $v}
+										{if $v.nc}
+										<dd class="dd6">
+											<div class="nav-left hover" style="overflow:hidden">
+												<a class=""><i class="{$v.icon}" style="font-size:20px;margin-top:14px"></i>
+												<a href="{:url('/index/index/info/id/'.$v.id)}">{$v.name}</a>
+												<span class="hot"></span>
+												<p>
+												</p>
+												{foreach $v.nc as $k=>$va} {if $k
+												< 2} <h3><a href="{:url('/index/index/info/id/'.$va.id)}">{$va.name}</a></h3>
+													{/if} {/foreach}
+													<p></p>
+											</div>
+											<div class="nav-right">
+												<div class="main-box">
+													<div class="left">
+														{if $v.nc}
+														<div class="list">
+															<div class="text">
+																<ul>
+																	{foreach $v.nc as $va}
+																	<li><a href="{:url('/index/index/info/id/'.$va.id)}">{$va.name}</a></li>
+																	{/foreach}
+
+																</ul>
+															</div>
+														</div>
+														{/if}
+													</div>
+												</div>
+											</div>
+										</dd>
+										{/if}
+										{/foreach}
+									</dl>
+								</div>
+							</div>
+						</div>
+						<ul class="nav-ul">
+							<li>
+								<a href="/">首页</a>
+							</li>
+							<li>
+								<a href="{:url('/index/index/info/id/79')}">学车服务</a>
+							</li>
+							<li>
+								<a href="{:url('/index/index/info/id/106')}">合作驾校</a>
+							</li>
+							<li>
+								<a href="{:url('/index/index/news/id/18')}">常见问题</a>
+							</li>
+							<li>
+								<a href="{:url('/index/index/news/id/19')}">行业资讯</a>
+							</li>
+							<li>
+								<a href="{:url('/index/index/info/id/113')}">关于我们</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<script type="text/javascript">
+					$("#flow-name").tabso({
+						cntSelect: "#flow-con",
+						tabEvent: "mouseover",
+						tabStyle: "normal"
+					});
+
+					//左导航hover
+					$("dd div.hover").each(function () {
+						$(this).mousemove(function () {
+							$("dd div.hover").addClass("nav-left").removeClass("nav-on");
+							$(this).addClass("nav-on").removeClass("nav-left");
+						})
+						$(this).mouseout(function () {
+							$("dd div.hover").addClass("nav-left").removeClass("nav-on");
+						});
+					});
+					// 左导航切换显示
+					$(".left-nav dd").hover(function () {
+						$(".nav-right", this).show();
+					});
+					$(".left-nav dd").mouseleave(function () {
+						$(".nav-right", this).hide();
+					});
+
+					//左菜单自适应
+					if ($(".left-nav dd").length <= 6) {
+						$(".left-nav dd").addClass("dd6")
+					} else if ($(".left-nav dd").length == 7) {
+						$(".left-nav dd").addClass("dd7")
+					} else if ($(".left-nav dd").length == 8) {
+						$(".left-nav dd").addClass("dd8")
+					};
+
+					//移动端菜单
+
+					$('.imgbot').click(function () {
+						$('.menubox').toggle()
+					})
+				</script>
+</div>
+</div>
+
+</div>
+
+
+{__CONTENT__}
+<!--联系我们-->
+
+<footer>
+	<div class="foot_link">
+		<div class="linkbox">
+			<span>友情链接:</span> {foreach $links as $v}
+			<a href="{$v.url}" target="_blank">{$v.name}</a> {/foreach}
+
+		</div>
+	</div>
+	<div class="banquan">
+		<p>
+			<a href="{:url('/index/index/news/id/18')}">常见问题</a> |
+			<a href="{:url('/index/index/news/id/19')}">行业资讯</a> |
+			<a href="{:url('/index/index/info/id/113')}">关于我们</a> |
+			<a href="{:url('/index/index/info/id/114')}">联系我们</a>
+		</p>
+		Copyright © 2017-{:date('Y')}　ICP备案号：{$site.beian}
+	</div>
+</footer>
+
+<script src="/assets/p/jquery.selectlist.js"></script>
+<script type="text/javascript">
+	$(function () {
+		$('select').selectlist({
+			zIndex: 10,
+			width: 290,
+			height: 40
+		});
+	})
+</script>
+
+
+
+</body>
+
+</html>

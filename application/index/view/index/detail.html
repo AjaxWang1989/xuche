@@ -1,0 +1,110 @@
+
+{layout name="layout/layout" /}
+<!--子页主体-->
+<div class="contentbox">
+	<div class="content">
+		<!--站内导航+分享-->
+		<div class="nav_nei zhuce_box">
+			<div class="nav_nei2">
+				<a href="/">首页</a> &gt;<a href="/index/index/news/id/{$detail.category.id}">{$detail.category.name}</a>
+			</div>
+			<div class="share">
+			</div>
+		</div>
+		<div class="content_Left">
+			<div class="article">
+				<!--标题-->
+				<div class="articleTitle">
+					<h1>{$detail.title}</h1>
+					<div class="link art">
+						<span class="question">{$detail.category.name}</span>
+						<span class="date2">{:substr($detail.publishtime,0,10)}</span>
+					</div>
+				</div>
+				<!--文章内容-->
+				<div class="article_content">
+					{$detail.content}
+					<div>
+						<span style="font-size:14px;"><strong><br>
+</strong></span>
+</div>
+
+<div class="art_share">
+	<span>分享：</span>
+	<div class="bdsharebuttonbox bdshare-button-style0-16" data-bd-bind="1522115766194">
+		<a href="/index/index/detail/id/{$detail.id}#" class="bds_more" data-cmd="more"></a>
+		<a href="/index/index/detail/id/{$detail.id}#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+		<a href="/index/index/detail/id/{$detail.id}#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+		<a href="/index/index/detail/id/{$detail.id}#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+		<a href="/index/index/detail/id/{$detail.id}#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a>
+		<a href="/index/index/detail/id/{$detail.id}#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	</div>
+	<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "2", "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {}, "image": { "viewList": ["qzone", "tsina", "tqq", "renren", "weixin"], "viewText": "分享到：", "viewSize": "16" }, "selectShare": { "bdContainerClass": null, "bdSelectMiniList": ["qzone", "tsina", "tqq", "renren", "weixin"] } }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+</div>
+</div>
+
+<div class="read">
+	{if $before}
+	<a href="/index/index/detail/id/{$before.id}" class="readprev">&lt; 阅读上一篇 <br>{$before.title}</a> {else/}
+	<a href="javascript:;" class="readprev">&lt; 阅读上一篇 <br>没有了</a> {/if} {if $next}
+	<a href="/index/index/detail/id/{$next.id}" class="readnext">阅读下一篇 &gt;<br>{$next.title}</a> {else/}
+	<a href="javascript:;" class="readnext">阅读下一篇 &gt;<br>没有了</a> {/if}
+</div>
+</div>
+</div>
+
+<div class="content_right">
+	<div class="rightTab">
+		<div class="RTop">
+			<span class="onstop">最新发布</span>
+		</div>
+		<div class="Rbox" style="display: block;">
+<ul>
+	{foreach $newList as $k=>$v}
+	<li><i>0{$k+1}</i><a href="/index/index/detail/id/{$v.id}">{:mb_substr($v.title,0,11,'utf8')}</a><span>{:substr($v.publishtime,0,10)}</span></li>
+	{/foreach}
+</ul>
+</div>
+</div>
+</div>
+
+</div>
+
+
+</div>
+
+
+<!--联系我们-->
+
+<!--金牌服务-->
+
+<div class="jpservice">
+	<dl>
+		<dt><img src="/assets/p/ser01.png" data-bd-imgshare-binded="1"></dt>
+		<dd>
+			<h3>低价透明</h3>
+			<p>统一报价，无隐形消费</p>
+		</dd>
+	</dl>
+	<dl class="seconddl">
+		<dt><img src="/assets/p/ser02.png" data-bd-imgshare-binded="1"></dt>
+		<dd>
+			<h3>金牌服务</h3>
+			<p>一对一专属顾问7*24小时金牌服务</p>
+		</dd>
+	</dl>
+	<dl class="threedl">
+		<dt><img src="/assets/p/ser03.png" data-bd-imgshare-binded="1"></dt>
+		<dd>
+			<h3>信息保密</h3>
+			<p>个人信息安全有保障</p>
+		</dd>
+	</dl>
+	<dl class="lastdl">
+		<dt><img src="/assets/p/ser04.png" data-bd-imgshare-binded="1"></dt>
+		<dd>
+			<h3>售后无忧</h3>
+			<p>服务出问题客服经理全程跟进</p>
+		</dd>
+	</dl>
+</div>
