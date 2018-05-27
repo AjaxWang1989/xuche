@@ -10,6 +10,7 @@ use think\console\input\Option;
 use think\console\Output;
 use think\Db;
 use think\Exception;
+use think\Log;
 
 class Install extends Command
 {
@@ -62,7 +63,13 @@ class Install extends Command
         Db::execute("SELECT 1");
 
         // 调用原生PDO对象进行批量查询
-        Db::getPdo()->exec($sql);
+        $result = Db::getPdo()->exec($sql);
+
+        if($result) {
+            Log::log('install ok');
+        }else{
+            Log::log('install failed');
+        }
 
         file_put_contents($installLockFile, 1);
 
