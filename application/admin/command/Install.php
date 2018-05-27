@@ -63,13 +63,7 @@ class Install extends Command
         Db::execute("SELECT 1");
 
         // 调用原生PDO对象进行批量查询
-        $result = Db::getPdo()->exec($sql);
-
-        if($result) {
-            exit('install ok');
-        }else{
-            exit('install failed');
-        }
+        Db::getPdo()->exec($sql);
 
         file_put_contents($installLockFile, 1);
 
