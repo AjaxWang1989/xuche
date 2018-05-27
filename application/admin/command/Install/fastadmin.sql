@@ -1,7 +1,18 @@
-/*Table structure for table `fa_admin` */
+/*
+ FastAdmin Install SQL
 
+ 官网: http://www.fastadmin.net
+ 演示: http://demo.fastadmin.net
+
+ Date: 2017年09月15日
+*/
+
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for fa_admin
+-- ----------------------------
 DROP TABLE IF EXISTS `fa_admin`;
-
 CREATE TABLE `fa_admin` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `username` varchar(20) NOT NULL DEFAULT '' COMMENT '用户名',
@@ -18,14 +29,23 @@ CREATE TABLE `fa_admin` (
   `status` varchar(30) NOT NULL DEFAULT 'normal' COMMENT '状态',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='管理员表';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='管理员表';
 
-/*Data for the table `fa_admin` */
+-- ----------------------------
+-- Records of fa_admin
+-- ----------------------------
+BEGIN;
+INSERT INTO `fa_admin` VALUES (1, 'admin', 'Admin', '075eaec83636846f51c152f29b98a2fd', 's4f3', '/assets/img/avatar.png', 'admin@fastadmin.net', 0, 1502029281, 1492186163, 1502029281, 'd3992c3b-5ecc-4ecb-9dc2-8997780fcadc', 'normal');
+INSERT INTO `fa_admin` VALUES (2, 'admin2', 'admin2', '9a28ce07ce875fbd14172a9ca5357d3c', '2dHDmj', '/assets/img/avatar.png', 'admin2@fastadmin.net', 0, 1505450906, 1492186163, 1505450906, 'df45fdd5-26f4-45ca-83b3-47e4491a315a', 'normal');
+INSERT INTO `fa_admin` VALUES (3, 'admin3', 'admin3', '1c11f945dfcd808a130a8c2a8753fe62', 'WOKJEn', '/assets/img/avatar.png', 'admin3@fastadmin.net', 0, 1501980868, 1492186201, 1501982377, '', 'normal');
+INSERT INTO `fa_admin` VALUES (4, 'admin22', 'admin22', '1c1a0aa0c3c56a8c1a908aab94519648', 'Aybcn5', '/assets/img/avatar.png', 'admin22@fastadmin.net', 0, 0, 1492186240, 1492186240, '', 'normal');
+INSERT INTO `fa_admin` VALUES (5, 'admin32', 'admin32', 'ade94d5d7a7033afa7d84ac3066d0a02', 'FvYK0u', '/assets/img/avatar.png', 'admin32@fastadmin.net', 0, 0, 1492186263, 1492186263, '', 'normal');
+COMMIT;
 
-/*Table structure for table `fa_admin_log` */
-
+-- ----------------------------
+-- Table structure for fa_admin_log
+-- ----------------------------
 DROP TABLE IF EXISTS `fa_admin_log`;
-
 CREATE TABLE `fa_admin_log` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `admin_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '管理员ID',
@@ -38,62 +58,12 @@ CREATE TABLE `fa_admin_log` (
   `createtime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '操作时间',
   PRIMARY KEY (`id`),
   KEY `name` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=1453 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='管理员日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=1317 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='管理员日志表';
 
-/*Data for the table `fa_admin_log` */
-
-/*Table structure for table `fa_adviser` */
-
-DROP TABLE IF EXISTS `fa_adviser`;
-
-CREATE TABLE `fa_adviser` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `name` varchar(50) NOT NULL COMMENT '姓名',
-  `img` varchar(512) NOT NULL COMMENT '头像',
-  `type` varchar(128) NOT NULL COMMENT '顾问类别',
-  `work_year` varchar(50) DEFAULT NULL COMMENT '工作年限',
-  `intro` varchar(500) DEFAULT NULL COMMENT '简介',
-  `tel` varchar(20) DEFAULT NULL COMMENT '咨询电话',
-  `weigh` int(10) DEFAULT NULL COMMENT '权重',
-  `createtime` int(10) DEFAULT NULL COMMENT '创建时间',
-  `updatetime` int(10) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='顾问';
-
-/*Data for the table `fa_adviser` */
-
-insert  into `fa_adviser`(`id`,`name`,`img`,`type`,`work_year`,`intro`,`tel`,`weigh`,`createtime`,`updatetime`) values (1,'陈货','/uploads/20180323/3dc97026af583efbcef7ef9dde070ff6.jpg','高级财经顾问','4','我是一个专业的财经顾问，很厉害的哦','0551-8887778',1,1521776379,1521776379);
-
-/*Table structure for table `fa_article` */
-
-DROP TABLE IF EXISTS `fa_article`;
-
-CREATE TABLE `fa_article` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `category_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分类ID(单选)',
-  `title` varchar(100) NOT NULL DEFAULT '' COMMENT '标题',
-  `content` text NOT NULL COMMENT '内容',
-  `keywords` varchar(100) NOT NULL DEFAULT '' COMMENT '关键字',
-  `description` varchar(255) NOT NULL DEFAULT '' COMMENT '描述概述摘要',
-  `image` varchar(100) NOT NULL DEFAULT '' COMMENT '封面图片',
-  `flag` set('hot','index','recommend','new') NOT NULL DEFAULT '' COMMENT '标志(多选):hot=热门,index=首页,recommend=推荐,new=最新',
-  `views` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '浏览次数',
-  `publishtime` datetime NOT NULL COMMENT '发布时间(datetime)',
-  `createtime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
-  `updatetime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
-  `weigh` int(10) NOT NULL DEFAULT '0' COMMENT '权重排序',
-  `status` enum('normal','hidden') NOT NULL DEFAULT 'normal' COMMENT '状态',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='文章管理表';
-
-/*Data for the table `fa_article` */
-
-insert  into `fa_article`(`id`,`category_id`,`title`,`content`,`keywords`,`description`,`image`,`flag`,`views`,`publishtime`,`createtime`,`updatetime`,`weigh`,`status`) values (64,19,'奥巴马来中国','<p style=\"padding: 0px; margin-top: 0px; margin-bottom: 0px; border: medium none; color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\">2017年4月23日（周日）13:30位于四季青红博馆 （海淀区昆明湖南路11号），由同创汇集团、<strong style=\"padding: 0px; margin: 0px;\"><a href=\"http://www.bjtdsw.com/news/zxzx/www.bjtdsw.com\" target=\"_blank\" style=\"padding: 0px; margin: 0px; text-decoration-line: none; cursor: pointer; color: rgb(102, 102, 102);\">北京腾达会计服务公司</a></strong>等联合举办的的《同创汇大讲堂》第一讲圆满结束。会议全程免费,花椒、易直播、一直播等多个平台直播，得到了到场企业代表以及众多收看在线直播的网友们一致好评。</p><p style=\"padding: 0px; margin-top: 0px; margin-bottom: 0px; border: medium none; color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\"><br/></p><p style=\"padding: 0px; margin-top: 0px; margin-bottom: 0px; border: medium none; color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\">课堂期间，企帮客（北京）企业管理有限公司副总裁兼北京腾达会计服务公司总经理郑连玲女士就“传统记账向互联网记账转型”为主题进行了分享演讲。</p><p style=\"padding: 0px; margin-top: 0px; margin-bottom: 0px; border: medium none; color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\"><br/></p><p style=\"padding: 0px; margin-top: 0px; margin-bottom: 0px; border: medium none; color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\">郑总谈到“随着我国市场经济的发展以及国家对会计工作的不断规范，代理记账需求日益增加，代理记账机构数量也快速增长。</p><p style=\"padding: 0px; margin-top: 0px; margin-bottom: 0px; border: medium none; color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\"><br/></p><p style=\"padding: 0px; margin-top: 0px; margin-bottom: 0px; border: medium none; color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\">&nbsp;回看互联网+的发展历史，互联网+与银行、集市&nbsp;、出行等传统行业的碰撞，结合智能高效的便利操作，产生了支付宝、淘宝、滴滴、云计算等互联网产业。传统记账的各种问题与互联网时代用户需求的碰撞产生了互联网记账。</p><p style=\"padding: 0px; margin-top: 0px; margin-bottom: 0px; border: medium none; color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\">o2o记账模式引领了财税行业方面的改革，同时是财税行业未来的发展趋势，应对时代变化，财税行业也应提供高端服务。”&nbsp; &nbsp;&nbsp;</p><p style=\"padding: 0px; margin-top: 0px; margin-bottom: 0px; border: medium none; color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\">郑总的演讲得到了在场企业家的热烈掌声，企业代表就互联网记账问题进行了提问，郑总认真分析传统代账问题关键在于：</p><p><br/></p>','','奥巴马来中国的简介','/uploads/20180322/3dc97026af583efbcef7ef9dde070ff6.jpg','hot',0,'2018-03-22 16:18:40',1521706768,1521706768,64,'normal'),(65,19,'这是测试文章','<p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\"><strong>【财务报表审计简介】</strong></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp; 财务报表审计是最常规的审计业务，是会计师事务所的法定业务，审计依据是中国注册会计师审计准则要求。指会计师事务所和委托方对拟委托事项的初步接洽和了解后，接受委托按审计目的的要求，采用特定的审计程序和方法，对被审单位的会计报表或特定事项进行审计，出具审计报告。也叫报表审核、报表审阅，会计师事务所一般简称为：表审或报表审计。通常提供给公司的股东、上级单位、以及政府主管部门。</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp; 按企业类型可分为：<a href=\"http://www.cpa800.com/audit/nzcwbbsj/\" style=\"text-decoration-line: none; color: rgb(197, 124, 56);\">内资企业财务报表审计</a>和<a href=\"http://www.cpa800.com/audit/wzcwbbsj/\" style=\"text-decoration-line: none; color: rgb(197, 124, 56);\">外资企业财务报表审计</a>。 &nbsp;查看更多审计服务请点击：<a href=\"http://www.cpa800.com/audit/\" style=\"text-decoration-line: none; color: rgb(197, 124, 56);\">审计服务</a></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\">&nbsp;</p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\"><strong>【财务报表审计报告用途】</strong></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp; 审计报告通常由“审计报告正文”、“审计报告附送资料”、“审计报告说明”等组成。</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp; 审计报告的用途包括以下方面：</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp; 1、 提高报告的预期使用者对会计报表的信赖程度；</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp; 2、 满足内部和外部使用者报送的需要，通常提供给公司股东或投资者，上级部门、政府机关；</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp; 3、 相关年检的需要。如：工商局、外汇管理局、税务局、海关、财政局、商委、统计局等。</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp; 4、 满足特殊目的的需要。如：在并购过程中，为规避收购方的财务和税务风险，对被并购企业进行全面的财务尽职调查。</span></p><p><br/></p>','1112','这是测试文章这是测试文章这是测试文章这是测试文章这是测试文章这是测试文章','/uploads/20180327/d94a258cd7b3bc80f6d5272ebe94d795.jpg','hot',3,'2018-03-27 10:18:27',1522117211,1522119039,65,'normal'),(66,19,'资产评估各项情况','<p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 16px;\"><span style=\"color: rgb(0, 0, 0);\"><strong>不动产评估</strong></span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp; 房地产、生产设备、汽车等运输设备，办公设备以及涉案物品价格鉴证，外商投资企业财产鉴定。</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp;&nbsp;</span><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">可为广大客户提供全面、专业、优质的各类房地产估价及咨询服务，具体包括：</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp;&nbsp;</span><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">1、企业改制、兼并、破产、清算涉及的房地产估价；</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp;&nbsp;</span><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">2、转让、出租、抵押、拍卖涉及的房地产估价；</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp;&nbsp;</span><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">3、上市公司经营性房地产市场公允价值年度评估；</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp;&nbsp;</span><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">4、银行、资产管理公司处置资产涉及的房地产估价；</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp;&nbsp;</span><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">5、司法鉴定涉及的房地产估价；</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp;&nbsp;</span><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">6、计提减值准备和实物出资涉及的房地产估价；</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp;&nbsp;</span><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">7、房屋拆迁估价。</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\">&nbsp;</p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\">&nbsp;</p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 16px;\"><span style=\"color: rgb(0, 0, 0);\"><strong>无形资产评估</strong></span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp;&nbsp;</span><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">市场经济下，客观上的评价标准之一就是其市场化的价值。在市场经济的作用下，各行各业都在想方设法对自身现有的无形资产进行挖掘、开发、整合，通过评估将各种附加值体现出来。对专利权、专有技术、特许权、商标、版权、软件的价值进行评估，该项评估以合理确定其收益为基础，为企业投资、交易、偿债等经济行为提供科学、客观、公正的价值认定结果。</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp;&nbsp;</span><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">我们提供的无形资产评估业务，具体包括：</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp; 1、</span><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">专利、专有技术评估</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp; 2、</span><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">品牌商标评估</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp; 3、</span><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">软件、版权评估</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp; 4、</span><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">客户关系、人力资本评估</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp; 5、</span><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">无形资产增资评估</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp; 6、</span><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">其他知识产权评估</span></span><br/><br/>&nbsp;</p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 16px;\"><strong><span style=\"color: rgb(0, 0, 0);\">企业价值评估</span></strong></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp;&nbsp;</span><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">企业价值评估是市场积极和现代企业制度相结合的产物，在西方发达国家经过长期发展，已形成多种模式，并日趋成熟。随着我国市场积极体制的建立和完善，资本市场在我国经济中发挥日益重要的作用，同时中国经济与世界经济联系更加紧密，对外开放和国际经济合作进一步加强，这些经济活动对企业价值评估的需求也日益增多。</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp;&nbsp;</span><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">为此，我们资产评估公司为国内外各大、中、小型企事业单位及其个人、外商独资、中外合资合作企业等提供各类企业价值评估业务，具体包括：</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp; 1、</span><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">设立公司、组建集团、中外合资、合作所涉及的企业价值评估</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp; 2、</span><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">企业资产重组、股份制改造涉及的企业价值评估</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp; 3、</span><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">企业股权转让所涉及的相关企业价值评估</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp; 4、</span><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">企业兼并收购、合并、分立、租赁承包、破产清算涉及的企业价值评估企业投融资涉及的企业价值评估</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp; 5、</span><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">资产抵押与担保涉及的企业价值评估</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp; 6、</span><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">法律诉讼所涉及的企业价值评估</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\">&nbsp;</p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 16px;\"><strong><span style=\"color: rgb(0, 0, 0);\">不良资产评估</span></strong></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp;&nbsp;</span><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">金融资产质量是衡量金融业竞争优势的重要标志，决定了金融业的效益与安全。而金融不良资产的大量累积不仅影响金融体系的稳定，也是威胁国民经济健康发展的巨大隐患。同时，不良资产集中爆发还可能导致金融危机。</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp;&nbsp;</span><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">作为独立的价值发现和价值管理的专业服务工具，金融不良资产评估不仅在金融机构改制、重组、上市以及金融市场 监管等方面提供价值判断依据，而且是金融不良资产处置的重要环节。不良资产评估在防范金融风险、维护金融市场安全方面具有重要作用。</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp;&nbsp;</span><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">经过多年实践，我国金融不良资产评估已经突破了原有的不良资产处置领域，扩展至服务金融机构经营管理、风险防范等领域。上海立信资产评估有限公司的金融不良资产评估业务，具体包括：</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp;&nbsp;</span><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">1、金融不良资产处置评估。</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp;&nbsp;</span><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">2、金融机构经营管理中的价值判断和风险防范评估。面临庞大的不良资产，金融机构自主定价能力较弱，需要专业的评估机构提供贷款五级分类的判定、贷款质量分析、风险质量控制等服务。</span></span></p><p><br/></p>','','资产评估各项情况资产评估各项情况资产评估各项情况资产评估各项情况资产评估各项情况资产评估各项情况资产评估各项情况资产评估各项情况资产评估各项情况资产评估各项情况资产评估各项情况资产评估各项情况资产评估各项情况资产评估各项情况资产评估各项情况资产评估各项情况','/uploads/20180327/d94a258cd7b3bc80f6d5272ebe94d795.jpg','',3,'2018-03-27 15:43:43',1522137084,1522137084,66,'normal'),(67,18,'跨省邮寄发票竟然是违法的！之前一直在违法啊!','<p style=\"padding: 0px; margin-top: 0px; margin-bottom: 0px; margin-left: 14px; border: medium none; color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\">你知道跨省邮寄发票是违法的吗？北京腾达会计<a href=\"http://www.bjtdsw.com/\" target=\"_blank\" style=\"padding: 0px; margin: 0px; text-decoration-line: none; cursor: pointer; color: rgb(102, 102, 102);\">代理记账</a>、<a href=\"http://www.bjtdsw.com/\" target=\"_blank\" style=\"padding: 0px; margin: 0px; text-decoration-line: none; cursor: pointer; color: rgb(102, 102, 102);\">工商注册</a>、<a href=\"http://www.bjtdsw.com/\" target=\"_blank\" style=\"padding: 0px; margin: 0px; text-decoration-line: none; cursor: pointer; color: rgb(102, 102, 102);\">社保公积金服务</a>服务公司请您赶紧过来看看相关规定吧！</p><p style=\"padding: 0px; margin-top: 0px; margin-bottom: 0px; margin-left: 14px; border: medium none; color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\"><br/></p><p style=\"padding: 0px; margin-top: 0px; margin-bottom: 0px; border: medium none; color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\"><br/></p><p><span style=\"color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; background-color: rgb(255, 255, 255);\">1违反《中华人民共和国发票管理办法》的规定，有下列情形之一的，由税务机关责令改正，可以处1万元以下的罚款；有违法所得的予以没收：</span></p><p style=\"padding: 0px; margin-top: 0px; margin-bottom: 0px; border: medium none; color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\"><br/></p><p style=\"padding: 0px; margin-top: 0px; margin-bottom: 0px; margin-left: 14px; border: medium none; color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\">（一）应当开具而未开具发票，或者未按照规定的时限、顺序、栏目，全部联次一次性开具发票，或者未加盖发票专用章的；</p><p style=\"padding: 0px; margin-top: 0px; margin-bottom: 0px; margin-left: 14px; border: medium none; color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\">（二）使用税控装置开具发票，未按期向主管税务机关报送开具发票的数据的；</p><p style=\"padding: 0px; margin-top: 0px; margin-bottom: 0px; margin-left: 14px; border: medium none; color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\">（三）扩大发票使用范围的；</p><p style=\"padding: 0px; margin-top: 0px; margin-bottom: 0px; margin-left: 14px; border: medium none; color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\">（四）以其他凭证代替发票使用的；</p><p style=\"padding: 0px; margin-top: 0px; margin-bottom: 0px; margin-left: 14px; border: medium none; color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\">（五）跨规定区域开具发票的；</p><p style=\"padding: 0px; margin-top: 0px; margin-bottom: 0px; margin-left: 14px; border: medium none; color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\">（六）未按照规定缴销发票的；</p><p style=\"padding: 0px; margin-top: 0px; margin-bottom: 0px; margin-left: 14px; border: medium none; color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\">（七）未按照规定存放和保管发票的。</p><p style=\"padding: 0px; margin-top: 0px; margin-bottom: 0px; margin-left: 14px; border: medium none; color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\"><br/></p><p style=\"padding: 0px; margin-top: 0px; margin-bottom: 0px; border: medium none; color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\"><br/></p><p><span style=\"color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; background-color: rgb(255, 255, 255);\">2跨规定的使用区域携带、邮寄、运输空白发票，以及携带、邮寄或者运输空白发票出入境的由税务机关责令改正，可以处1万元以下的罚款；情节严重的，处1万元以上3万元以下的罚款；有违法所得的予以没收。</span></p><p style=\"padding: 0px; margin-top: 0px; margin-bottom: 0px; border: medium none; color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\"><br/></p><p style=\"padding: 0px; margin-top: 0px; margin-bottom: 0px; margin-left: 14px; border: medium none; color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\">丢失发票或者擅自损毁发票的，依照前款规定处罚。</p><p style=\"padding: 0px; margin-top: 0px; margin-bottom: 0px; margin-left: 14px; border: medium none; color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\"><br/></p><p style=\"padding: 0px; margin-top: 0px; margin-bottom: 0px; border: medium none; color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\"><br/></p><p><span style=\"color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; background-color: rgb(255, 255, 255);\">3违反《中华人民共和国发票管理办法》第二十二条第二款的规定虚开发票的，由税务机关没收违法所得。</span></p><p style=\"padding: 0px; margin-top: 0px; margin-bottom: 0px; border: medium none; color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\"><br/></p><p style=\"padding: 0px; margin-top: 0px; margin-bottom: 0px; margin-left: 14px; border: medium none; color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\">虚开金额在1万元以下的，可以并处5万元以下的罚款；虚开金额超过1万元的，并处5万元以上50万元以下的罚款；构成犯罪的，依法追究刑事责任。</p><p style=\"padding: 0px; margin-top: 0px; margin-bottom: 0px; border: medium none; color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\"><br/></p><p style=\"padding: 0px; margin-top: 0px; margin-bottom: 0px; margin-left: 14px; border: medium none; color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\">非法代开发票的，依照前款规定处罚。</p><p style=\"padding: 0px; margin-top: 0px; margin-bottom: 0px; border: medium none; color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\"><br/></p><p><span style=\"color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; background-color: rgb(255, 255, 255);\">4有下列情形之一的，由税务机关处1万元以上5万元以下的罚款；</span></p><p style=\"padding: 0px; margin-top: 0px; margin-bottom: 0px; border: medium none; color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\"><br/></p><p style=\"padding: 0px; margin-top: 0px; margin-bottom: 0px; margin-left: 14px; border: medium none; color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\">情节严重的，处5万元以上50万元以下的罚款；有违法所得的予以没收：</p><p style=\"padding: 0px; margin-top: 0px; margin-bottom: 0px; margin-left: 14px; border: medium none; color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\">（一）转借、转让、介绍他人转让发票、发票监制章和发票防伪专用品的；&nbsp;</p><p style=\"padding: 0px; margin-top: 0px; margin-bottom: 0px; margin-left: 14px; border: medium none; color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\">（二）知道或者应当知道是私自印制、伪造、变造、非法取得或者废止的发票而受让、开具、存放、携带、邮寄、运输的。&nbsp;</p><p style=\"padding: 0px; margin-top: 0px; margin-bottom: 0px; margin-left: 14px; border: medium none; color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\"><br/></p><p style=\"padding: 0px; margin-top: 0px; margin-bottom: 0px; border: medium none; color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\"><br/></p><p style=\"padding: 0px; margin-top: 0px; margin-bottom: 0px; border: medium none; color: rgb(102, 102, 102); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\">5对违反发票管理法规情节严重构成犯罪税务机关应当依法移送司法机关处理。</p><p><br/></p>','','我是简介','/uploads/20180328/d94a258cd7b3bc80f6d5272ebe94d795.jpg','',0,'2018-03-28 15:57:20',1522223891,1522223891,67,'normal');
-
-/*Table structure for table `fa_attachment` */
-
+-- ----------------------------
+-- Table structure for fa_attachment
+-- ----------------------------
 DROP TABLE IF EXISTS `fa_attachment`;
-
 CREATE TABLE `fa_attachment` (
   `id` int(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `url` varchar(255) NOT NULL DEFAULT '' COMMENT '物理路径',
@@ -110,16 +80,19 @@ CREATE TABLE `fa_attachment` (
   `storage` enum('local','upyun','qiniu') NOT NULL DEFAULT 'local' COMMENT '存储位置',
   `sha1` varchar(40) NOT NULL DEFAULT '' COMMENT '文件 sha1编码',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='附件表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='附件表';
 
-/*Data for the table `fa_attachment` */
+-- ----------------------------
+-- Records of fa_attachment
+-- ----------------------------
+BEGIN;
+INSERT INTO `fa_attachment` VALUES (1, '/assets/img/qrcode.png', '150', '150', 'png', 0, 21859, 'image/png', '', 1499681848, 1499681848, 1499681848, 'local', '17163603d0263e4838b9387ff2cd4877e8b018f6');
+COMMIT;
 
-insert  into `fa_attachment`(`id`,`url`,`imagewidth`,`imageheight`,`imagetype`,`imageframes`,`filesize`,`mimetype`,`extparam`,`createtime`,`updatetime`,`uploadtime`,`storage`,`sha1`) values (1,'/assets/img/qrcode.png','150','150','png',0,21859,'image/png','',1499681848,1499681848,1499681848,'local','17163603d0263e4838b9387ff2cd4877e8b018f6'),(2,'/uploads/20180322/72086bf8f8d638854d4956dd1fb0e2ed.png','738','221','png',0,21534,'image/png','',1521699642,1521699642,1521699642,'local','2fa143ff22afc7851ee29759d4393ca87aae3e38'),(3,'/uploads/20180322/3dc97026af583efbcef7ef9dde070ff6.jpg','480','434','jpg',0,33838,'image/jpeg','',1521699676,1521699676,1521699676,'local','ed41a283a41fb43e3385d87c82fe5e43055d0487'),(4,'/uploads/20180322/3dc97026af583efbcef7ef9dde070ff6.jpg','480','434','jpg',0,33838,'image/jpeg','',1521702867,1521702867,1521702867,'local','ed41a283a41fb43e3385d87c82fe5e43055d0487'),(5,'/uploads/20180322/3dc97026af583efbcef7ef9dde070ff6.jpg','480','434','jpg',0,33838,'image/jpeg','',1521706744,1521706744,1521706744,'local','ed41a283a41fb43e3385d87c82fe5e43055d0487'),(6,'/uploads/20180323/3dc97026af583efbcef7ef9dde070ff6.jpg','480','434','jpg',0,33838,'image/jpeg','',1521776344,1521776344,1521776344,'local','ed41a283a41fb43e3385d87c82fe5e43055d0487'),(7,'/uploads/20180323/6f45392660c295990c571d93fa321d1d.jpg','547','300','jpg',0,16116,'image/jpeg','',1521790530,1521790530,1521790530,'local','af2d5ca049c8ddd0a75865d42d9fa0e139a431ff'),(8,'/uploads/20180326/d94a258cd7b3bc80f6d5272ebe94d795.jpg','650','368','jpg',0,38193,'image/jpeg','',1522066972,1522066972,1522066972,'local','cc5e7180dbb197f86f3f64e48cb053fabd4d35b2'),(9,'/uploads/20180326/188ce7a426cc8c8d38f2b599118f0dd8.jpg','1920','430','jpg',0,115051,'image/jpeg','',1522067156,1522067156,1522067156,'local','449a23dfff6af454cad664b6095fd319cd6496fe'),(10,'/uploads/20180326/16a82c97e160eb110c761a4fa136a3c5.jpg','1920','430','jpg',0,373152,'image/jpeg','',1522067163,1522067163,1522067163,'local','9b2e9cbfa3147221ecb064c5cebd9d998f73ecc3'),(11,'/uploads/20180327/d94a258cd7b3bc80f6d5272ebe94d795.jpg','650','368','jpg',0,38193,'image/jpeg','',1522117162,1522117162,1522117162,'local','cc5e7180dbb197f86f3f64e48cb053fabd4d35b2'),(12,'/uploads/20180327/d94a258cd7b3bc80f6d5272ebe94d795.jpg','650','368','jpg',0,38193,'image/jpeg','',1522137081,1522137081,1522137081,'local','cc5e7180dbb197f86f3f64e48cb053fabd4d35b2'),(13,'/uploads/20180328/d94a258cd7b3bc80f6d5272ebe94d795.jpg','650','368','jpg',0,38193,'image/jpeg','',1522223863,1522223863,1522223863,'local','cc5e7180dbb197f86f3f64e48cb053fabd4d35b2'),(14,'/uploads/20180329/6a69cbf3ffa9b0dcb862fe7cf4681025.jpg','590','360','jpg',0,27668,'image/jpeg','',1522293701,1522293701,1522293701,'local','2b45272a4eea26f1a00e6d6285540b31f4d1bd23'),(15,'/uploads/20180329/a5165e10040e2e588e70c05106c7db25.jpg','121','121','jpg',0,5956,'image/jpeg','',1522293954,1522293954,1522293954,'local','443bae5234215fbe1c0065c704fe697853e4e9b1');
-
-/*Table structure for table `fa_auth_group` */
-
+-- ----------------------------
+-- Table structure for fa_auth_group
+-- ----------------------------
 DROP TABLE IF EXISTS `fa_auth_group`;
-
 CREATE TABLE `fa_auth_group` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '父组别',
@@ -131,14 +104,21 @@ CREATE TABLE `fa_auth_group` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='分组表';
 
-/*Data for the table `fa_auth_group` */
+-- ----------------------------
+-- Records of fa_auth_group
+-- ----------------------------
+BEGIN;
+INSERT INTO `fa_auth_group` VALUES (1, 0, 'Admin group', '*', 1490883540, 149088354, 'normal');
+INSERT INTO `fa_auth_group` VALUES (2, 1, 'Second group', '13,14,16,15,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,40,41,42,43,44,45,46,47,48,49,50,55,56,57,58,59,60,61,62,63,64,65,1,9,10,11,7,6,8,2,4,5', 1490883540, 1505465692, 'normal');
+INSERT INTO `fa_auth_group` VALUES (3, 2, 'Third group', '1,4,9,10,11,13,14,15,16,17,40,41,42,43,44,45,46,47,48,49,50,55,56,57,58,59,60,61,62,63,64,65,5', 1490883540, 1502205322, 'normal');
+INSERT INTO `fa_auth_group` VALUES (4, 1, 'Second group 2', '1,4,13,14,15,16,17,55,56,57,58,59,60,61,62,63,64,65', 1490883540, 1502205350, 'normal');
+INSERT INTO `fa_auth_group` VALUES (5, 2, 'Third group 2', '1,2,6,7,8,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34', 1490883540, 1502205344, 'normal');
+COMMIT;
 
-insert  into `fa_auth_group`(`id`,`pid`,`name`,`rules`,`createtime`,`updatetime`,`status`) values (1,0,'Admin group','*',1490883540,149088354,'normal'),(2,1,'二级管理组','2,3,6,7,8,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,85,86,87,88,89,90,91,92,93,94,95,96,103,104,105,106,107,108,109,110,111,112,113,114',1490883540,1522295044,'normal'),(3,2,'Third group','1,4,9,10,11,13,14,15,16,17,40,41,42,43,44,45,46,47,48,49,50,55,56,57,58,59,60,61,62,63,64,65,5',1490883540,1502205322,'normal'),(4,1,'Second group 2','1,4,13,14,15,16,17,55,56,57,58,59,60,61,62,63,64,65',1490883540,1502205350,'normal'),(5,2,'Third group 2','1,2,6,7,8,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34',1490883540,1502205344,'normal');
-
-/*Table structure for table `fa_auth_group_access` */
-
+-- ----------------------------
+-- Table structure for fa_auth_group_access
+-- ----------------------------
 DROP TABLE IF EXISTS `fa_auth_group_access`;
-
 CREATE TABLE `fa_auth_group_access` (
   `uid` int(10) unsigned NOT NULL COMMENT '会员ID',
   `group_id` int(10) unsigned NOT NULL COMMENT '级别ID',
@@ -147,14 +127,21 @@ CREATE TABLE `fa_auth_group_access` (
   KEY `group_id` (`group_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='权限分组表';
 
-/*Data for the table `fa_auth_group_access` */
+-- ----------------------------
+-- Records of fa_auth_group_access
+-- ----------------------------
+BEGIN;
+INSERT INTO `fa_auth_group_access` VALUES (1, 1);
+INSERT INTO `fa_auth_group_access` VALUES (2, 2);
+INSERT INTO `fa_auth_group_access` VALUES (3, 3);
+INSERT INTO `fa_auth_group_access` VALUES (4, 5);
+INSERT INTO `fa_auth_group_access` VALUES (5, 5);
+COMMIT;
 
-insert  into `fa_auth_group_access`(`uid`,`group_id`) values (1,1),(2,2),(3,3),(4,5),(5,5),(6,2);
-
-/*Table structure for table `fa_auth_rule` */
-
+-- ----------------------------
+-- Table structure for fa_auth_rule
+-- ----------------------------
 DROP TABLE IF EXISTS `fa_auth_rule`;
-
 CREATE TABLE `fa_auth_rule` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `type` enum('menu','file') NOT NULL DEFAULT 'file' COMMENT 'menu为菜单,file为权限节点',
@@ -173,34 +160,102 @@ CREATE TABLE `fa_auth_rule` (
   UNIQUE KEY `name` (`name`) USING BTREE,
   KEY `pid` (`pid`),
   KEY `weigh` (`weigh`)
-) ENGINE=InnoDB AUTO_INCREMENT=115 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='节点表';
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='节点表';
 
-/*Data for the table `fa_auth_rule` */
+-- ----------------------------
+-- Records of fa_auth_rule
+-- ----------------------------
+BEGIN;
+INSERT INTO `fa_auth_rule` VALUES (1, 'file', 0, 'dashboard', 'Dashboard', 'fa fa-dashboard', '', 'Dashboard tips', 1, 1497429920, 1497429920, 143, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (2, 'file', 0, 'general', 'General', 'fa fa-cogs', '', '', 1, 1497429920, 1497430169, 137, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (3, 'file', 0, 'category', 'Category', 'fa fa-list', '', 'Category tips', 1, 1497429920, 1497429920, 119, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (4, 'file', 0, 'addon', 'Addon', 'fa fa-rocket', '', 'Addon tips', 1, 1502035509, 1502035509, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (5, 'file', 0, 'auth', 'Auth', 'fa fa-group', '', '', 1, 1497429920, 1497430092, 99, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (6, 'file', 2, 'general/config', 'Config', 'fa fa-cog', '', 'Config tips', 1, 1497429920, 1497430683, 60, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (7, 'file', 2, 'general/attachment', 'Attachment', 'fa fa-file-image-o', '', 'Attachment tips', 1, 1497429920, 1497430699, 53, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (8, 'file', 2, 'general/profile', 'Profile', 'fa fa-user', '', '', 1, 1497429920, 1497429920, 34, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (9, 'file', 5, 'auth/admin', 'Admin', 'fa fa-user', '', 'Admin tips', 1, 1497429920, 1497430320, 118, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (10, 'file', 5, 'auth/adminlog', 'Admin log', 'fa fa-list-alt', '', 'Admin log tips', 1, 1497429920, 1497430307, 113, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (11, 'file', 5, 'auth/group', 'Group', 'fa fa-group', '', 'Group tips', 1, 1497429920, 1497429920, 109, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (12, 'file', 5, 'auth/rule', 'Rule', 'fa fa-bars', '', 'Rule tips', 1, 1497429920, 1497430581, 104, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (13, 'file', 1, 'dashboard/index', 'View', 'fa fa-circle-o', '', '', 0, 1497429920, 1497429920, 136, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (14, 'file', 1, 'dashboard/add', 'Add', 'fa fa-circle-o', '', '', 0, 1497429920, 1497429920, 135, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (15, 'file', 1, 'dashboard/del', 'Delete', 'fa fa-circle-o', '', '', 0, 1497429920, 1497429920, 133, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (16, 'file', 1, 'dashboard/edit', 'Edit', 'fa fa-circle-o', '', '', 0, 1497429920, 1497429920, 134, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (17, 'file', 1, 'dashboard/multi', 'Multi', 'fa fa-circle-o', '', '', 0, 1497429920, 1497429920, 132, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (18, 'file', 6, 'general/config/index', 'View', 'fa fa-circle-o', '', '', 0, 1497429920, 1497429920, 52, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (19, 'file', 6, 'general/config/add', 'Add', 'fa fa-circle-o', '', '', 0, 1497429920, 1497429920, 51, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (20, 'file', 6, 'general/config/edit', 'Edit', 'fa fa-circle-o', '', '', 0, 1497429920, 1497429920, 50, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (21, 'file', 6, 'general/config/del', 'Delete', 'fa fa-circle-o', '', '', 0, 1497429920, 1497429920, 49, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (22, 'file', 6, 'general/config/multi', 'Multi', 'fa fa-circle-o', '', '', 0, 1497429920, 1497429920, 48, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (23, 'file', 7, 'general/attachment/index', 'View', 'fa fa-circle-o', '', 'Attachment tips', 0, 1497429920, 1497429920, 59, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (24, 'file', 7, 'general/attachment/select', 'Select attachment', 'fa fa-circle-o', '', '', 0, 1497429920, 1497429920, 58, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (25, 'file', 7, 'general/attachment/add', 'Add', 'fa fa-circle-o', '', '', 0, 1497429920, 1497429920, 57, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (26, 'file', 7, 'general/attachment/edit', 'Edit', 'fa fa-circle-o', '', '', 0, 1497429920, 1497429920, 56, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (27, 'file', 7, 'general/attachment/del', 'Delete', 'fa fa-circle-o', '', '', 0, 1497429920, 1497429920, 55, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (28, 'file', 7, 'general/attachment/multi', 'Multi', 'fa fa-circle-o', '', '', 0, 1497429920, 1497429920, 54, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (29, 'file', 8, 'general/profile/index', 'View', 'fa fa-circle-o', '', '', 0, 1497429920, 1497429920, 33, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (30, 'file', 8, 'general/profile/update', 'Update profile', 'fa fa-circle-o', '', '', 0, 1497429920, 1497429920, 32, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (31, 'file', 8, 'general/profile/add', 'Add', 'fa fa-circle-o', '', '', 0, 1497429920, 1497429920, 31, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (32, 'file', 8, 'general/profile/edit', 'Edit', 'fa fa-circle-o', '', '', 0, 1497429920, 1497429920, 30, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (33, 'file', 8, 'general/profile/del', 'Delete', 'fa fa-circle-o', '', '', 0, 1497429920, 1497429920, 29, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (34, 'file', 8, 'general/profile/multi', 'Multi', 'fa fa-circle-o', '', '', 0, 1497429920, 1497429920, 28, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (35, 'file', 3, 'category/index', 'View', 'fa fa-circle-o', '', 'Category tips', 0, 1497429920, 1497429920, 142, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (36, 'file', 3, 'category/add', 'Add', 'fa fa-circle-o', '', '', 0, 1497429920, 1497429920, 141, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (37, 'file', 3, 'category/edit', 'Edit', 'fa fa-circle-o', '', '', 0, 1497429920, 1497429920, 140, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (38, 'file', 3, 'category/del', 'Delete', 'fa fa-circle-o', '', '', 0, 1497429920, 1497429920, 139, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (39, 'file', 3, 'category/multi', 'Multi', 'fa fa-circle-o', '', '', 0, 1497429920, 1497429920, 138, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (40, 'file', 9, 'auth/admin/index', 'View', 'fa fa-circle-o', '', 'Admin tips', 0, 1497429920, 1497429920, 117, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (41, 'file', 9, 'auth/admin/add', 'Add', 'fa fa-circle-o', '', '', 0, 1497429920, 1497429920, 116, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (42, 'file', 9, 'auth/admin/edit', 'Edit', 'fa fa-circle-o', '', '', 0, 1497429920, 1497429920, 115, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (43, 'file', 9, 'auth/admin/del', 'Delete', 'fa fa-circle-o', '', '', 0, 1497429920, 1497429920, 114, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (44, 'file', 10, 'auth/adminlog/index', 'View', 'fa fa-circle-o', '', 'Admin log tips', 0, 1497429920, 1497429920, 112, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (45, 'file', 10, 'auth/adminlog/detail', 'Detail', 'fa fa-circle-o', '', '', 0, 1497429920, 1497429920, 111, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (46, 'file', 10, 'auth/adminlog/del', 'Delete', 'fa fa-circle-o', '', '', 0, 1497429920, 1497429920, 110, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (47, 'file', 11, 'auth/group/index', 'View', 'fa fa-circle-o', '', 'Group tips', 0, 1497429920, 1497429920, 108, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (48, 'file', 11, 'auth/group/add', 'Add', 'fa fa-circle-o', '', '', 0, 1497429920, 1497429920, 107, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (49, 'file', 11, 'auth/group/edit', 'Edit', 'fa fa-circle-o', '', '', 0, 1497429920, 1497429920, 106, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (50, 'file', 11, 'auth/group/del', 'Delete', 'fa fa-circle-o', '', '', 0, 1497429920, 1497429920, 105, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (51, 'file', 12, 'auth/rule/index', 'View', 'fa fa-circle-o', '', 'Rule tips', 0, 1497429920, 1497429920, 103, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (52, 'file', 12, 'auth/rule/add', 'Add', 'fa fa-circle-o', '', '', 0, 1497429920, 1497429920, 102, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (53, 'file', 12, 'auth/rule/edit', 'Edit', 'fa fa-circle-o', '', '', 0, 1497429920, 1497429920, 101, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (54, 'file', 12, 'auth/rule/del', 'Delete', 'fa fa-circle-o', '', '', 0, 1497429920, 1497429920, 100, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (55, 'file', 4, 'addon/index', 'View', 'fa fa-circle-o', '', 'Addon tips', 0, 1502035509, 1502035509, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (56, 'file', 4, 'addon/add', 'Add', 'fa fa-circle-o', '', '', 0, 1502035509, 1502035509, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (57, 'file', 4, 'addon/edit', 'Edit', 'fa fa-circle-o', '', '', 0, 1502035509, 1502035509, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (58, 'file', 4, 'addon/del', 'Delete', 'fa fa-circle-o', '', '', 0, 1502035509, 1502035509, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (59, 'file', 4, 'addon/local', 'Local install', 'fa fa-circle-o', '', '', 0, 1502035509, 1502035509, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (60, 'file', 4, 'addon/state', 'Update state', 'fa fa-circle-o', '', '', 0, 1502035509, 1502035509, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (61, 'file', 4, 'addon/install', 'Install', 'fa fa-circle-o', '', '', 0, 1502035509, 1502035509, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (62, 'file', 4, 'addon/uninstall', 'Uninstall', 'fa fa-circle-o', '', '', 0, 1502035509, 1502035509, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (63, 'file', 4, 'addon/config', 'Setting', 'fa fa-circle-o', '', '', 0, 1502035509, 1502035509, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (64, 'file', 4, 'addon/refresh', 'Refresh', 'fa fa-circle-o', '', '', 0, 1502035509, 1502035509, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (65, 'file', 4, 'addon/multi', 'Multi', 'fa fa-circle-o', '', '', 0, 1502035509, 1502035509, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (66, 'file', 0, 'user', 'User', 'fa fa-list', '', '', 1, 1516374729, 1516374729, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (67, 'file', 66, 'user/user', 'User', 'fa fa-user', '', '', 1, 1516374729, 1516374729, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (68, 'file', 67, 'user/user/index', 'View', 'fa fa-circle-o', '', '', 0, 1516374729, 1516374729, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (69, 'file', 67, 'user/user/edit', 'Edit', 'fa fa-circle-o', '', '', 0, 1516374729, 1516374729, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (70, 'file', 67, 'user/user/add', 'Add', 'fa fa-circle-o', '', '', 0, 1516374729, 1516374729, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (71, 'file', 67, 'user/user/del', 'Del', 'fa fa-circle-o', '', '', 0, 1516374729, 1516374729, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (72, 'file', 67, 'user/user/multi', 'Multi', 'fa fa-circle-o', '', '', 0, 1516374729, 1516374729, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (73, 'file', 66, 'user/group', 'User group', 'fa fa-users', '', '', 1, 1516374729, 1516374729, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (74, 'file', 73, 'user/group/add', 'Add', 'fa fa-circle-o', '', '', 0, 1516374729, 1516374729, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (75, 'file', 73, 'user/group/edit', 'Edit', 'fa fa-circle-o', '', '', 0, 1516374729, 1516374729, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (76, 'file', 73, 'user/group/index', 'View', 'fa fa-circle-o', '', '', 0, 1516374729, 1516374729, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (77, 'file', 73, 'user/group/del', 'Del', 'fa fa-circle-o', '', '', 0, 1516374729, 1516374729, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (78, 'file', 73, 'user/group/multi', 'Multi', 'fa fa-circle-o', '', '', 0, 1516374729, 1516374729, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (79, 'file', 66, 'user/rule', 'User rule', 'fa fa-circle-o', '', '', 1, 1516374729, 1516374729, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (80, 'file', 79, 'user/rule/index', 'View', 'fa fa-circle-o', '', '', 0, 1516374729, 1516374729, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (81, 'file', 79, 'user/rule/del', 'Del', 'fa fa-circle-o', '', '', 0, 1516374729, 1516374729, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (82, 'file', 79, 'user/rule/add', 'Add', 'fa fa-circle-o', '', '', 0, 1516374729, 1516374729, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (83, 'file', 79, 'user/rule/edit', 'Edit', 'fa fa-circle-o', '', '', 0, 1516374729, 1516374729, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (84, 'file', 79, 'user/rule/multi', 'Multi', 'fa fa-circle-o', '', '', 0, 1516374729, 1516374729, 0, 'normal');
+COMMIT;
 
-insert  into `fa_auth_rule`(`id`,`type`,`pid`,`name`,`title`,`icon`,`condition`,`remark`,`ismenu`,`createtime`,`updatetime`,`weigh`,`status`) values (1,'file',0,'dashboard','控制台','fa fa-dashboard','','Dashboard tips',1,1497429920,1521790641,143,'hidden'),(2,'file',0,'general','General','fa fa-cogs','','',1,1497429920,1497430169,137,'normal'),(3,'file',0,'category','Category','fa fa-list','','Category tips',1,1497429920,1497429920,119,'normal'),(4,'file',0,'addon','插件管理','fa fa-rocket','','Addon tips',1,1502035509,1521790631,0,'hidden'),(5,'file',0,'auth','权限管理','fa fa-group','','',1,1497429920,1522292001,99,'normal'),(6,'file',2,'general/config','Config','fa fa-cog','','Config tips',1,1497429920,1497430683,60,'normal'),(7,'file',2,'general/attachment','Attachment','fa fa-file-image-o','','Attachment tips',1,1497429920,1497430699,53,'normal'),(8,'file',2,'general/profile','Profile','fa fa-user','','',1,1497429920,1497429920,34,'normal'),(9,'file',5,'auth/admin','Admin','fa fa-user','','Admin tips',1,1497429920,1497430320,118,'normal'),(10,'file',5,'auth/adminlog','Admin log','fa fa-list-alt','','Admin log tips',1,1497429920,1497430307,113,'normal'),(11,'file',5,'auth/group','Group','fa fa-group','','Group tips',1,1497429920,1497429920,109,'normal'),(12,'file',5,'auth/rule','Rule','fa fa-bars','','Rule tips',1,1497429920,1497430581,104,'normal'),(13,'file',1,'dashboard/index','View','fa fa-circle-o','','',0,1497429920,1497429920,136,'normal'),(14,'file',1,'dashboard/add','Add','fa fa-circle-o','','',0,1497429920,1497429920,135,'normal'),(15,'file',1,'dashboard/del','Delete','fa fa-circle-o','','',0,1497429920,1497429920,133,'normal'),(16,'file',1,'dashboard/edit','Edit','fa fa-circle-o','','',0,1497429920,1497429920,134,'normal'),(17,'file',1,'dashboard/multi','Multi','fa fa-circle-o','','',0,1497429920,1497429920,132,'normal'),(18,'file',6,'general/config/index','View','fa fa-circle-o','','',0,1497429920,1497429920,52,'normal'),(19,'file',6,'general/config/add','Add','fa fa-circle-o','','',0,1497429920,1497429920,51,'normal'),(20,'file',6,'general/config/edit','Edit','fa fa-circle-o','','',0,1497429920,1497429920,50,'normal'),(21,'file',6,'general/config/del','Delete','fa fa-circle-o','','',0,1497429920,1497429920,49,'normal'),(22,'file',6,'general/config/multi','Multi','fa fa-circle-o','','',0,1497429920,1497429920,48,'normal'),(23,'file',7,'general/attachment/index','View','fa fa-circle-o','','Attachment tips',0,1497429920,1497429920,59,'normal'),(24,'file',7,'general/attachment/select','Select attachment','fa fa-circle-o','','',0,1497429920,1497429920,58,'normal'),(25,'file',7,'general/attachment/add','Add','fa fa-circle-o','','',0,1497429920,1497429920,57,'normal'),(26,'file',7,'general/attachment/edit','Edit','fa fa-circle-o','','',0,1497429920,1497429920,56,'normal'),(27,'file',7,'general/attachment/del','Delete','fa fa-circle-o','','',0,1497429920,1497429920,55,'normal'),(28,'file',7,'general/attachment/multi','Multi','fa fa-circle-o','','',0,1497429920,1497429920,54,'normal'),(29,'file',8,'general/profile/index','View','fa fa-circle-o','','',0,1497429920,1497429920,33,'normal'),(30,'file',8,'general/profile/update','Update profile','fa fa-circle-o','','',0,1497429920,1497429920,32,'normal'),(31,'file',8,'general/profile/add','Add','fa fa-circle-o','','',0,1497429920,1497429920,31,'normal'),(32,'file',8,'general/profile/edit','Edit','fa fa-circle-o','','',0,1497429920,1497429920,30,'normal'),(33,'file',8,'general/profile/del','Delete','fa fa-circle-o','','',0,1497429920,1497429920,29,'normal'),(34,'file',8,'general/profile/multi','Multi','fa fa-circle-o','','',0,1497429920,1497429920,28,'normal'),(35,'file',3,'category/index','View','fa fa-circle-o','','Category tips',0,1497429920,1497429920,142,'normal'),(36,'file',3,'category/add','Add','fa fa-circle-o','','',0,1497429920,1497429920,141,'normal'),(37,'file',3,'category/edit','Edit','fa fa-circle-o','','',0,1497429920,1497429920,140,'normal'),(38,'file',3,'category/del','Delete','fa fa-circle-o','','',0,1497429920,1497429920,139,'normal'),(39,'file',3,'category/multi','Multi','fa fa-circle-o','','',0,1497429920,1497429920,138,'normal'),(40,'file',9,'auth/admin/index','View','fa fa-circle-o','','Admin tips',0,1497429920,1497429920,117,'normal'),(41,'file',9,'auth/admin/add','Add','fa fa-circle-o','','',0,1497429920,1497429920,116,'normal'),(42,'file',9,'auth/admin/edit','Edit','fa fa-circle-o','','',0,1497429920,1497429920,115,'normal'),(43,'file',9,'auth/admin/del','Delete','fa fa-circle-o','','',0,1497429920,1497429920,114,'normal'),(44,'file',10,'auth/adminlog/index','View','fa fa-circle-o','','Admin log tips',0,1497429920,1497429920,112,'normal'),(45,'file',10,'auth/adminlog/detail','Detail','fa fa-circle-o','','',0,1497429920,1497429920,111,'normal'),(46,'file',10,'auth/adminlog/del','Delete','fa fa-circle-o','','',0,1497429920,1497429920,110,'normal'),(47,'file',11,'auth/group/index','View','fa fa-circle-o','','Group tips',0,1497429920,1497429920,108,'normal'),(48,'file',11,'auth/group/add','Add','fa fa-circle-o','','',0,1497429920,1497429920,107,'normal'),(49,'file',11,'auth/group/edit','Edit','fa fa-circle-o','','',0,1497429920,1497429920,106,'normal'),(50,'file',11,'auth/group/del','Delete','fa fa-circle-o','','',0,1497429920,1497429920,105,'normal'),(51,'file',12,'auth/rule/index','View','fa fa-circle-o','','Rule tips',0,1497429920,1497429920,103,'normal'),(52,'file',12,'auth/rule/add','Add','fa fa-circle-o','','',0,1497429920,1497429920,102,'normal'),(53,'file',12,'auth/rule/edit','Edit','fa fa-circle-o','','',0,1497429920,1497429920,101,'normal'),(54,'file',12,'auth/rule/del','Delete','fa fa-circle-o','','',0,1497429920,1497429920,100,'normal'),(55,'file',4,'addon/index','View','fa fa-circle-o','','Addon tips',0,1502035509,1502035509,0,'normal'),(56,'file',4,'addon/add','Add','fa fa-circle-o','','',0,1502035509,1502035509,0,'normal'),(57,'file',4,'addon/edit','Edit','fa fa-circle-o','','',0,1502035509,1502035509,0,'normal'),(58,'file',4,'addon/del','Delete','fa fa-circle-o','','',0,1502035509,1502035509,0,'normal'),(59,'file',4,'addon/local','Local install','fa fa-circle-o','','',0,1502035509,1502035509,0,'normal'),(60,'file',4,'addon/state','Update state','fa fa-circle-o','','',0,1502035509,1502035509,0,'normal'),(61,'file',4,'addon/install','Install','fa fa-circle-o','','',0,1502035509,1502035509,0,'normal'),(62,'file',4,'addon/uninstall','Uninstall','fa fa-circle-o','','',0,1502035509,1502035509,0,'normal'),(63,'file',4,'addon/config','Setting','fa fa-circle-o','','',0,1502035509,1502035509,0,'normal'),(64,'file',4,'addon/refresh','Refresh','fa fa-circle-o','','',0,1502035509,1502035509,0,'normal'),(65,'file',4,'addon/multi','Multi','fa fa-circle-o','','',0,1502035509,1502035509,0,'normal'),(66,'file',0,'user','会员管理','fa fa-list','','',1,1516374729,1521790623,0,'hidden'),(67,'file',66,'user/user','User','fa fa-user','','',1,1516374729,1516374729,0,'normal'),(68,'file',67,'user/user/index','View','fa fa-circle-o','','',0,1516374729,1516374729,0,'normal'),(69,'file',67,'user/user/edit','Edit','fa fa-circle-o','','',0,1516374729,1516374729,0,'normal'),(70,'file',67,'user/user/add','Add','fa fa-circle-o','','',0,1516374729,1516374729,0,'normal'),(71,'file',67,'user/user/del','Del','fa fa-circle-o','','',0,1516374729,1516374729,0,'normal'),(72,'file',67,'user/user/multi','Multi','fa fa-circle-o','','',0,1516374729,1516374729,0,'normal'),(73,'file',66,'user/group','User group','fa fa-users','','',1,1516374729,1516374729,0,'normal'),(74,'file',73,'user/group/add','Add','fa fa-circle-o','','',0,1516374729,1516374729,0,'normal'),(75,'file',73,'user/group/edit','Edit','fa fa-circle-o','','',0,1516374729,1516374729,0,'normal'),(76,'file',73,'user/group/index','View','fa fa-circle-o','','',0,1516374729,1516374729,0,'normal'),(77,'file',73,'user/group/del','Del','fa fa-circle-o','','',0,1516374729,1516374729,0,'normal'),(78,'file',73,'user/group/multi','Multi','fa fa-circle-o','','',0,1516374729,1516374729,0,'normal'),(79,'file',66,'user/rule','User rule','fa fa-circle-o','','',1,1516374729,1516374729,0,'normal'),(80,'file',79,'user/rule/index','View','fa fa-circle-o','','',0,1516374729,1516374729,0,'normal'),(81,'file',79,'user/rule/del','Del','fa fa-circle-o','','',0,1516374729,1516374729,0,'normal'),(82,'file',79,'user/rule/add','Add','fa fa-circle-o','','',0,1516374729,1516374729,0,'normal'),(83,'file',79,'user/rule/edit','Edit','fa fa-circle-o','','',0,1516374729,1516374729,0,'normal'),(84,'file',79,'user/rule/multi','Multi','fa fa-circle-o','','',0,1516374729,1516374729,0,'normal'),(85,'file',0,'banner','轮播图管理','fa fa-image','','',1,1521694007,1521790688,0,'normal'),(86,'file',85,'banner/index','查看','fa fa-circle-o','','',0,1521694007,1521694007,0,'normal'),(87,'file',85,'banner/add','添加','fa fa-circle-o','','',0,1521694007,1521694007,0,'normal'),(88,'file',85,'banner/edit','编辑','fa fa-circle-o','','',0,1521694007,1521694007,0,'normal'),(89,'file',85,'banner/del','删除','fa fa-circle-o','','',0,1521694007,1521694007,0,'normal'),(90,'file',85,'banner/multi','批量更新','fa fa-circle-o','','',0,1521694007,1521694007,0,'normal'),(91,'file',0,'article','文章管理','fa fa-file-pdf-o','','',1,1521705820,1521790665,0,'normal'),(92,'file',91,'article/index','查看','fa fa-circle-o','','',0,1521705820,1521705820,0,'normal'),(93,'file',91,'article/add','添加','fa fa-circle-o','','',0,1521705820,1521705820,0,'normal'),(94,'file',91,'article/edit','编辑','fa fa-circle-o','','',0,1521705820,1521705820,0,'normal'),(95,'file',91,'article/del','删除','fa fa-circle-o','','',0,1521705820,1521705820,0,'normal'),(96,'file',91,'article/multi','批量更新','fa fa-circle-o','','',0,1521705820,1521705820,0,'normal'),(97,'file',0,'adviser','顾问管理','fa fa-address-card','','',1,1521775618,1521790672,0,'normal'),(98,'file',97,'adviser/index','查看','fa fa-circle-o','','',0,1521775618,1521775618,0,'normal'),(99,'file',97,'adviser/add','添加','fa fa-circle-o','','',0,1521775618,1521775618,0,'normal'),(100,'file',97,'adviser/edit','编辑','fa fa-circle-o','','',0,1521775618,1521775618,0,'normal'),(101,'file',97,'adviser/del','删除','fa fa-circle-o','','',0,1521775618,1521775618,0,'normal'),(102,'file',97,'adviser/multi','批量更新','fa fa-circle-o','','',0,1521775618,1521775618,0,'normal'),(103,'file',0,'link','友情链接','fa fa-link','','',1,1521777040,1521777040,0,'normal'),(104,'file',103,'link/index','查看','fa fa-circle-o','','',0,1521777040,1521777040,0,'normal'),(105,'file',103,'link/add','添加','fa fa-circle-o','','',0,1521777040,1521777040,0,'normal'),(106,'file',103,'link/edit','编辑','fa fa-circle-o','','',0,1521777040,1521777040,0,'normal'),(107,'file',103,'link/del','删除','fa fa-circle-o','','',0,1521777040,1521777040,0,'normal'),(108,'file',103,'link/multi','批量更新','fa fa-circle-o','','',0,1521777040,1521777040,0,'normal'),(109,'file',0,'customer','成功案例','fa fa-address-book-o','','',1,1521790185,1522290584,0,'normal'),(110,'file',109,'customer/index','查看','fa fa-circle-o','','',0,1521790185,1521790185,0,'normal'),(111,'file',109,'customer/add','添加','fa fa-circle-o','','',0,1521790185,1521790185,0,'normal'),(112,'file',109,'customer/edit','编辑','fa fa-circle-o','','',0,1521790185,1521790185,0,'normal'),(113,'file',109,'customer/del','删除','fa fa-circle-o','','',0,1521790185,1521790185,0,'normal'),(114,'file',109,'customer/multi','批量更新','fa fa-circle-o','','',0,1521790185,1521790185,0,'normal');
-
-/*Table structure for table `fa_banner` */
-
-DROP TABLE IF EXISTS `fa_banner`;
-
-CREATE TABLE `fa_banner` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `img` varchar(512) NOT NULL COMMENT '图片',
-  `category_id` int(10) NOT NULL DEFAULT '0' COMMENT '所属分类',
-  `status` tinyint(2) NOT NULL DEFAULT '1' COMMENT '状态',
-  `createtime` int(10) DEFAULT NULL COMMENT '创建时间',
-  `updatetime` int(10) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='轮播图';
-
-/*Data for the table `fa_banner` */
-
-insert  into `fa_banner`(`id`,`img`,`category_id`,`status`,`createtime`,`updatetime`) values (1,'/uploads/20180326/16a82c97e160eb110c761a4fa136a3c5.jpg',0,1,1521702873,1522067164),(2,'/uploads/20180326/188ce7a426cc8c8d38f2b599118f0dd8.jpg',0,1,1522066973,1522295099);
-
-/*Table structure for table `fa_category` */
-
+-- ----------------------------
+-- Table structure for fa_category
+-- ----------------------------
 DROP TABLE IF EXISTS `fa_category`;
-
 CREATE TABLE `fa_category` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '父ID',
@@ -212,10 +267,6 @@ CREATE TABLE `fa_category` (
   `keywords` varchar(255) NOT NULL DEFAULT '' COMMENT '关键字',
   `description` varchar(255) NOT NULL DEFAULT '' COMMENT '描述',
   `diyname` varchar(30) NOT NULL DEFAULT '' COMMENT '自定义名称',
-  `price` varchar(50) DEFAULT NULL COMMENT '服务价格',
-  `info` text,
-  `icon` varchar(50) NOT NULL DEFAULT 'fa fa-th' COMMENT '图标',
-  `nc` varchar(50) DEFAULT NULL,
   `createtime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updatetime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
   `weigh` int(10) NOT NULL DEFAULT '0' COMMENT '权重',
@@ -223,16 +274,31 @@ CREATE TABLE `fa_category` (
   PRIMARY KEY (`id`),
   KEY `weigh` (`weigh`,`id`),
   KEY `pid` (`pid`)
-) ENGINE=InnoDB AUTO_INCREMENT=115 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='分类表';
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='分类表';
 
-/*Data for the table `fa_category` */
+-- ----------------------------
+-- Records of fa_category
+-- ----------------------------
+BEGIN;
+INSERT INTO `fa_category` VALUES (1, 0, 'page', '官方新闻', 'news', 'recommend', '/assets/img/qrcode.png', '', '', 'news', 1495262190, 1495262190, 1, 'normal');
+INSERT INTO `fa_category` VALUES (2, 0, 'page', '移动应用', 'mobileapp', 'hot', '/assets/img/qrcode.png', '', '', 'mobileapp', 1495262244, 1495262244, 2, 'normal');
+INSERT INTO `fa_category` VALUES (3, 2, 'page', '微信公众号', 'wechatpublic', 'index', '/assets/img/qrcode.png', '', '', 'wechatpublic', 1495262288, 1495262288, 3, 'normal');
+INSERT INTO `fa_category` VALUES (4, 2, 'page', 'Android开发', 'android', 'recommend', '/assets/img/qrcode.png', '', '', 'android', 1495262317, 1495262317, 4, 'normal');
+INSERT INTO `fa_category` VALUES (5, 0, 'page', '软件产品', 'software', 'recommend', '/assets/img/qrcode.png', '', '', 'software', 1495262336, 1499681850, 5, 'normal');
+INSERT INTO `fa_category` VALUES (6, 5, 'page', '网站建站', 'website', 'recommend', '/assets/img/qrcode.png', '', '', 'website', 1495262357, 1495262357, 6, 'normal');
+INSERT INTO `fa_category` VALUES (7, 5, 'page', '企业管理软件', 'company', 'index', '/assets/img/qrcode.png', '', '', 'company', 1495262391, 1495262391, 7, 'normal');
+INSERT INTO `fa_category` VALUES (8, 6, 'page', 'PC端', 'website-pc', 'recommend', '/assets/img/qrcode.png', '', '', 'website-pc', 1495262424, 1495262424, 8, 'normal');
+INSERT INTO `fa_category` VALUES (9, 6, 'page', '移动端', 'website-mobile', 'recommend', '/assets/img/qrcode.png', '', '', 'website-mobile', 1495262456, 1495262456, 9, 'normal');
+INSERT INTO `fa_category` VALUES (10, 7, 'page', 'CRM系统 ', 'company-crm', 'recommend', '/assets/img/qrcode.png', '', '', 'company-crm', 1495262487, 1495262487, 10, 'normal');
+INSERT INTO `fa_category` VALUES (11, 7, 'page', 'SASS平台软件', 'company-sass', 'recommend', '/assets/img/qrcode.png', '', '', 'company-sass', 1495262515, 1495262515, 11, 'normal');
+INSERT INTO `fa_category` VALUES (12, 0, 'test', '测试1', 'test1', 'recommend', '/assets/img/qrcode.png', '', '', 'test1', 1497015727, 1497015727, 12, 'normal');
+INSERT INTO `fa_category` VALUES (13, 0, 'test', '测试2', 'test2', 'recommend', '/assets/img/qrcode.png', '', '', 'test2', 1497015738, 1497015738, 13, 'normal');
+COMMIT;
 
-insert  into `fa_category`(`id`,`pid`,`type`,`name`,`nickname`,`flag`,`image`,`keywords`,`description`,`diyname`,`price`,`info`,`icon`,`nc`,`createtime`,`updatetime`,`weigh`,`status`) values (18,0,'article','常见问题','','','','','','','',NULL,'fa fa-th',NULL,1522050725,1522050725,0,'normal'),(19,0,'article','行业资讯','','','','','','','',NULL,'fa fa-th',NULL,1522050740,1522050740,0,'normal'),(20,0,'normal','关于我们','','','','','','','',NULL,'fa fa-th',NULL,1522050748,1522050748,0,'normal'),(35,0,'service','审计服务','','','','','','',NULL,'<p><span style=\"color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; background-color: rgb(248, 241, 231);\">审计是会计师事务所的法定业务，指会计师事务和委托方对拟委托事项的初步接洽和了解后，接受委托按审计目的的要求，采用特定的审计程序和方法，对被审单位的会计报表或特定事项进行审计，出具审计报告</span></p>','fa fa-tv',NULL,1522144919,1522228822,0,'normal'),(36,35,'service','移民投资审计','','','','','','',NULL,'<p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\"><strong>【什么是移民审计】</strong></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp; 移民审计是提供给使馆，以反映申请移民人士所拥有企业的经营结果的专项审计。通常包括最近三年的财务报表，以及财务指标分析等内容。一般需要英文报告，京审会计师事务所在做移民审计时可以提供专业人员翻译的英文审计报告。</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp; 不同于一般审计合法性的目的，投资移民审计是为证明申请者是否具备移民接受国所规定的资产及盈利能力的条件。由于申请者所在国与移民接受国在经济体制、专业资格认可、语言等方面的差异，移民接受国更倾向于承认具有国际性专业资格的会计师事务所及其注册会计师所出具的审计报告。&nbsp;</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp; 京审是澳洲会计师公会会员，我们通晓各国移民法规及审核标准，在为投资者提供符合移民目的国要求的审计报告的同时，亦对投资者的个人、公司资料进行整理， 有助投资者更清晰掌握自身资产及企业营运情况。此外，我们的投资及财务顾问亦会为客户在移民目的国的投资项目提供风险预测及防患建议。 &nbsp;</span><br/>&nbsp;</p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\"><strong>【我们的服务包括】</strong></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><a href=\"http://www.cpa800.com/audit/adlyymsj/\" style=\"text-decoration-line: none; color: rgb(197, 124, 56);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp; 澳大利亚投资移民审计 　</span></a></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp; 美国投资移民审计 　</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp; 加拿大投资移民审计 　</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp; 英国投资移民审计 　</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp; 其它国家投资移民审计 　</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">　</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\"><strong>【移民审计资料清单】</strong></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\"><strong>&nbsp; &nbsp; 财务类资料&nbsp;</strong></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp; 1 会计报表及附注 　</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp; 2 全部账目 　</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp; 3 会计凭证 　</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp; 4 科目余额表 (1级至末级的期初、期末和累计发生额 )</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp; 5 银行存款对账单、余额调节表 (全部银行存款对账单)&nbsp;</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp;&nbsp;6 房屋、车辆产权证明 　</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp;&nbsp;7 长短期投资，投资协议、被投资单位营业执照、被投资单位会计报表 (截止会计报表日的被投资单位经审计会计报表)&nbsp;</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp;&nbsp;8 长短期借款合同，抵押担保资料 　</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp;&nbsp;9 固定资产盘点表 (标明固定资产名、规格、数量、原值、预计残值、使用年限、折旧额、净值 )</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp;&nbsp;10 存货盘点表 (截止会计报表日的盘点表，标明存货的名称、规格、数量、单价、总金额)&nbsp;</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp;&nbsp;11 纳税申报表及缴款书 (所有税种全年纳税资料)</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp;&nbsp;12 发票使用情况汇总表 (领购票号、金额；已使用的票号、金额；剩余的票号、金额 )</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\"><strong>&nbsp; &nbsp;&nbsp;备查类资料</strong></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp; 13 营业执照 (工商)</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp;&nbsp;14 税务登记证 (国税、地税)&nbsp;</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp;&nbsp;15 组织机构代码证书 (质量监督局)&nbsp;</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp;&nbsp;16 纳税鉴定文件 (国税、地税)</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp;&nbsp;17 公司章程、协议 (工商备案)&nbsp;</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp;&nbsp;18 设立、变更验资报告 　</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp;&nbsp;19 以前年度审计报告 　</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp;&nbsp;20 财务会计制度及相关内部控制制度 　</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp;&nbsp;21 单位组织结构框架图 　</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp;&nbsp;22 股东会、董事会重大决议等文件 　</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp;&nbsp;23 房屋租赁协议</span><br/>&nbsp;</p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\"><strong>【我们的优势】</strong></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp; 1、我们将会选派有丰富经验的注册会计师作为项目负责人；</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp; 2、选派有澳洲审计经历的注册会计师作现场负责人；</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp; 3、我们会结合委托方的要求与贵公司的实际情况提供高效、优质的服务；</span></p><p><br/></p>','fa fa-th',NULL,1522144919,1522207008,0,'normal'),(37,35,'service','财务报表审计','','','','','','',NULL,NULL,'fa fa-th',NULL,1522144919,0,0,'normal'),(38,35,'service','内资企业财务报表审计','','','','','','',NULL,NULL,'fa fa-th',NULL,1522144919,0,0,'normal'),(39,35,'service','外资企业财务报表审计','','','','','','',NULL,NULL,'fa fa-th',NULL,1522144919,0,0,'normal'),(40,35,'service','企业内部审计','','','','','','',NULL,NULL,'fa fa-th',NULL,1522144919,0,0,'normal'),(41,35,'service','代表处审计','','','','','','',NULL,NULL,'fa fa-th',NULL,1522144919,0,0,'normal'),(42,35,'service','律师事务所年检审计','','','','','','',NULL,NULL,'fa fa-th',NULL,1522144919,0,0,'normal'),(43,35,'service','财产转移审计','','','','','','',NULL,NULL,'fa fa-th',NULL,1522144919,0,0,'normal'),(44,35,'service','改制审计','','','','','','',NULL,NULL,'fa fa-th',NULL,1522144919,0,0,'normal'),(45,35,'service','物业公司审计','','','','','','',NULL,NULL,'fa fa-th',NULL,1522144919,0,0,'normal'),(46,35,'service','外汇审计','','','','','','',NULL,NULL,'fa fa-th',NULL,1522144919,0,0,'normal'),(47,35,'service','清算审计','','','','','','',NULL,NULL,'fa fa-th',NULL,1522144919,0,0,'normal'),(48,35,'service','商定程序审计','','','','','','',NULL,NULL,'fa fa-th',NULL,1522144919,0,0,'normal'),(49,35,'service','离任审计','','','','','','',NULL,NULL,'fa fa-th',NULL,1522144919,0,0,'normal'),(50,35,'service','事业单位审计','','','','','','',NULL,NULL,'fa fa-th',NULL,1522144919,0,0,'normal'),(51,35,'service','社会团体审计','','','','','','',NULL,NULL,'fa fa-th',NULL,1522144919,0,0,'normal'),(52,35,'service','动漫企业认定专项审计','','','','','','',NULL,NULL,'fa fa-th',NULL,1522144919,0,0,'normal'),(53,35,'service','个人股权转让净资产审计','','','','','','',NULL,NULL,'fa fa-th',NULL,1522144919,0,0,'normal'),(55,35,'service','移民投资审计','','','','','','',NULL,NULL,'fa fa-th',NULL,1522144920,0,0,'normal'),(56,35,'service','财务报表审计','','','','','','',NULL,NULL,'fa fa-th',NULL,1522144920,0,0,'normal'),(57,35,'service','内资企业财务报表审计','','','','','','',NULL,NULL,'fa fa-th',NULL,1522144920,0,0,'normal'),(58,35,'service','外资企业财务报表审计','','','','','','',NULL,NULL,'fa fa-th',NULL,1522144920,0,0,'normal'),(59,35,'service','企业内部审计','','','','','','',NULL,NULL,'fa fa-th',NULL,1522144920,0,0,'normal'),(60,35,'service','代表处审计','','','','','','',NULL,NULL,'fa fa-th',NULL,1522144920,0,0,'normal'),(61,35,'service','律师事务所年检审计','','','','','','',NULL,NULL,'fa fa-th',NULL,1522144920,0,0,'normal'),(62,35,'service','财产转移审计','','','','','','',NULL,NULL,'fa fa-th',NULL,1522144920,0,0,'normal'),(63,35,'service','改制审计','','','','','','',NULL,NULL,'fa fa-th',NULL,1522144920,0,0,'normal'),(64,35,'service','物业公司审计','','','','','','',NULL,NULL,'fa fa-th',NULL,1522144920,0,0,'normal'),(65,35,'service','外汇审计','','','','','','',NULL,NULL,'fa fa-th',NULL,1522144920,0,0,'normal'),(66,35,'service','清算审计','','','','','','',NULL,NULL,'fa fa-th',NULL,1522144920,0,0,'normal'),(67,35,'service','商定程序审计','','','','','','',NULL,NULL,'fa fa-th',NULL,1522144920,0,0,'normal'),(68,35,'service','离任审计','','','','','','',NULL,NULL,'fa fa-th',NULL,1522144920,0,0,'normal'),(69,35,'service','事业单位审计','','','','','','',NULL,NULL,'fa fa-th',NULL,1522144920,0,0,'normal'),(70,35,'service','社会团体审计','','','','','','',NULL,NULL,'fa fa-th',NULL,1522144920,0,0,'normal'),(71,35,'service','动漫企业认定专项审计','','','','','','',NULL,NULL,'fa fa-th',NULL,1522144920,0,0,'normal'),(72,35,'service','个人股权转让净资产审计','','','','','','',NULL,NULL,'fa fa-th',NULL,1522144920,0,0,'normal'),(73,0,'service','验资服务','','','','','','',NULL,'','fa fa-money',NULL,0,1522227732,0,'normal'),(74,73,'service','外资企业验资','','','','','','',NULL,NULL,'fa fa-th',NULL,0,0,0,'normal'),(75,73,'service','内资企业验资','','','','','','',NULL,NULL,'fa fa-th',NULL,0,0,0,'normal'),(76,73,'service','律师事务所验资','','','','','','',NULL,NULL,'fa fa-th',NULL,0,0,0,'normal'),(77,73,'service','社会团体验资','','','','','','',NULL,NULL,'fa fa-th',NULL,0,0,0,'normal'),(78,73,'service','事业单位验资','','','','','','',NULL,NULL,'fa fa-th',NULL,0,0,0,'normal'),(79,0,'service','税务服务','','','','','','',NULL,'<p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp;京审税务师事务所有限公司具有国家税务总局注册税务师管理中心批准准予执业，执行法定的涉税鉴证和涉税服务业务执业证书（证书号01309），依法经北京工市商行政管理机关注册登记成立。主要业务范围如下 ：</span><br/>&nbsp;</p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><strong><span style=\"font-size: 12px;\">【税务审计】</span></strong></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp; 企业所得税汇算清缴鉴证，出具鉴证报告；</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp; 企业亏损及财产损失 审核鉴证，出具鉴证报告；</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp; 企业所得税前弥补亏损的审核事项，出具鉴证报告；</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp; 企业结税审核，出具鉴证报告；</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp; 纳税信誉等级评定，出具鉴证报告；</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp; 土地增值税清算 审核鉴证，出具鉴证报告；</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp; 房地产企业税务清算</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp; 资产损失税前扣除鉴证</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\">&nbsp; &nbsp; 企业研发费用加计扣除，出具鉴证报告。</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\"><strong>&nbsp; &nbsp; 税务顾问</strong>---及时获得财税政策文件，用足用好税收优惠政策；财税政策咨询，工作疑难问题解答；定期审核企业账务、纳税申报资料，为企业财务核算、税务处理把关；定期对企业财务人员进行财税知识培训。</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\"><strong>&nbsp; &nbsp; 税收筹划</strong>---企业整体税收筹划；分税种筹划（如个人所得税、企业所得税、土地增值税等）；分行业筹划（如房地产业、新技术企业等）。</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\"><strong>&nbsp; &nbsp; 财税培训-</strong>--税收筹划培训；最新财税政策培训；企业、集团内部分行业的财税知识培训。</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\"><strong>&nbsp; &nbsp; 税务代理-</strong>--办理税务登记、变更税务登记和注销税务登记手续；办理纳税申 报或扣缴税款报告；办理缴纳税款和申报退税手续；代为申请减免税及其他税收优惠；审查纳税情况；代理税务行政复议，协调税务纠纷，代理制作涉税文书；办理 除增值税专用发票外的发票领购手续；</span></p><p><br/></p>','fa fa-th',NULL,1522220384,1522220403,0,'normal'),(80,0,'service','代理服务','','','','','','',NULL,'','fa fa-map',NULL,0,1522227804,0,'normal'),(81,80,'service','公司注销','','','','','','',NULL,NULL,'fa fa-th',NULL,0,0,0,'normal'),(82,80,'service','高新技术企业认定','','','','','','',NULL,NULL,'fa fa-th',NULL,0,0,0,'normal'),(83,80,'service','高新技术企业复审','','','','','','',NULL,NULL,'fa fa-th',NULL,0,0,0,'normal'),(84,80,'service','高新技术企业检查应对','','','','','','',NULL,NULL,'fa fa-th',NULL,0,0,0,'normal'),(85,80,'service','高新技术企业税务风险管理','','','','','','',NULL,NULL,'fa fa-th',NULL,0,0,0,'normal'),(86,80,'service','高新技术企业研发费用辅助账辅导','','','','','','',NULL,NULL,'fa fa-th',NULL,0,0,0,'normal'),(87,80,'service','研发费用加计扣除申请','','','','','','',NULL,NULL,'fa fa-th',NULL,0,0,0,'normal'),(88,80,'service','技术转让所得税减免申请','','','','','','',NULL,NULL,'fa fa-th',NULL,0,0,0,'normal'),(89,80,'service','高新企业技术合同认证','','','','','','',NULL,NULL,'fa fa-th',NULL,0,0,0,'normal'),(90,80,'service','双软企业认证','','','','','','',NULL,NULL,'fa fa-th',NULL,0,0,0,'normal'),(91,80,'service','动漫企业申请和审计','','','','','','',NULL,NULL,'fa fa-th',NULL,0,0,0,'normal'),(92,0,'service','咨询服务','','','','','','',NULL,'','fa fa-tasks',NULL,0,1522227869,0,'normal'),(93,92,'service','日常税务咨询','','','','','','',NULL,NULL,'fa fa-th',NULL,0,0,0,'normal'),(94,92,'service','常年财务顾问','','','','','','',NULL,NULL,'fa fa-th',NULL,0,0,0,'normal'),(95,92,'service','常年税务顾问','','','','','','',NULL,NULL,'fa fa-th',NULL,0,0,0,'normal'),(96,92,'service','税务风险管理','','','','','','',NULL,NULL,'fa fa-th',NULL,0,0,0,'normal'),(97,92,'service','企业改制税务规划','','','','','','',NULL,NULL,'fa fa-th',NULL,0,0,0,'normal'),(98,92,'service','企业投资税务规划','','','','','','',NULL,NULL,'fa fa-th',NULL,0,0,0,'normal'),(99,92,'service','并购重组税务规划','','','','','','',NULL,NULL,'fa fa-th',NULL,0,0,0,'normal'),(100,92,'service','企业尽职调查','','','','','','',NULL,NULL,'fa fa-th',NULL,0,0,0,'normal'),(101,92,'service','企业上市税务规划','','','','','','',NULL,NULL,'fa fa-th',NULL,0,0,0,'normal'),(102,92,'service','公司设立税务规划','','','','','','',NULL,NULL,'fa fa-th',NULL,0,0,0,'normal'),(103,92,'service','投资退出税务规划','','','','','','',NULL,NULL,'fa fa-th',NULL,0,0,0,'normal'),(104,92,'service','清算注销税务规划','','','','','','',NULL,NULL,'fa fa-th',NULL,0,0,0,'normal'),(105,92,'service','\"营改增\"税负测算及税务规划','','','','','','',NULL,NULL,'fa fa-th',NULL,0,0,0,'normal'),(106,0,'service','会计服务','','','','','','',NULL,'<p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">&nbsp;京审会计师事务所设有专门的财务服务部门，提供专业的财务税务服务。包括财务体系设计、会计核算、纳税申报、印鉴管理、代发工资、财务分析、财务咨询等。</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp; 京审事务所制定并实施了一套严格、完整的财务服务体系，采用先进的信息管理系统进行业务流程控制。</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp; 京审事务所充分利用在审计领域的优势为客户提供财务税务服务。我们的方法是“让注册会计师、注册税务师为您记帐”。</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp; 注册会计师是国际公认的财务领域最高水平。他们经验最多，知识最全，服务最专业。将他们在审计过程中获得的经验运用于财务服务中，充分保证服务的专业水平。</span></span><br/>&nbsp;</p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\"><strong>【服务范围】</strong></span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp; 1、外国企业北京代表处会计服务</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp; 2、高新技术及软件企业会计服务</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp; 3、外资企业中英文会计服务</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp; 4、技术转移机构会计服务</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp; 5、律师事务所会计服务</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp; 6、 初创企业会计外包服务&nbsp;</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp; 7、代理企业税务会计服务</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp; 8、代理个人所得税申报服务</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp; 9、常年财务和税务顾问</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp; 10、纳税筹划</span></span><br/>&nbsp;</p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\"><strong>【财务会计服务收费标准】</strong></span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp; 注：</span></span>收费基数系按资产总额或年收入熟高确定，税收筹划以合理避税额为收费基数。</p><table width=\"550px\" style=\"width: 458px;\"><tbody><tr style=\"margin: 0px; padding: 0px;\" class=\"firstRow\"><td><br/></td><td>服务类小规模</td><td>一般纳税人</td><td>外资企业</td><td>外国代表处</td><td>律师事务所</td></tr><tr style=\"margin: 0px; padding: 0px;\"><td>标准服务（收费起点）&nbsp;</td><td>1000元/月 &nbsp;</td><td>3000元/月&nbsp;</td><td>4000元/月&nbsp;</td><td>1000元/月&nbsp;</td><td>2000元/月&nbsp;</td></tr><tr style=\"margin: 0px; padding: 0px;\"><td>外包服务 （收费起点）&nbsp;</td><td>5000元/月&nbsp;</td><td>10000元/月&nbsp;</td><td>10000元/月 &nbsp;</td><td>6000元/月&nbsp;</td><td>10000元/月 &nbsp;</td></tr></tbody></table><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; 对新技术企业和国际技术转移中心入住企业，提供会计和税务服务，按8折优惠</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><br/><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\"><strong>【财务会计服务分类】</strong></span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp; 我们的财务服务包括标准服务和外包服务，事务所可以根据企业实际情况为您量身定做。</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp; 标准服务通过代理记帐能够满足企业最基本的会计核算、纳税申报等核算职能，满足企业日常经营活动中的对外财务税务报送需要，您只需要设一名出纳人员，全部会计核算和纳税申报工作由事务所承担完成。具体服务包括：初始财务核算体系设计、日常财务核算、税收申报、会计档案的整理、查询保管等，更适用于规模较小的企业。</span></span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: 宋体, &quot;Times New Roman&quot;, Times, serif; font-size: 14px; white-space: normal; background-color: rgb(248, 241, 231);\"><span style=\"font-size: 12px;\"><span style=\"color: rgb(0, 0, 0);\">&nbsp; &nbsp; 外包服务是事务所作为企业会计核算部门为企业提供整体财务税务服务。企业把对内和对外的财务核算全部交给专业事务所负责，不仅能能够满足企业对外的会计核算、纳税申报等职能，同时为企业内部管理者提供财务核算信息，作为企业的经营管理者不用再为财务人员的离职或频繁更换而担忧，同时减少财务人员不胜任等带来的财务和税务风险。企业只需要设一名出纳或不设财务人员。外包适用于初创企业和规模较小的成长性企业。其服务除基本服务外包括授权开具、保管银行印鉴、支票，证照变更、年检，人事管理、社会保险核算和交纳，内部财务报表等</span></span></p><p><br/></p>','fa fa-th',NULL,0,1522222396,0,'normal'),(107,0,'service','造价','','','','','','',NULL,'','fa fa-industry',NULL,0,1522227928,0,'normal'),(108,107,'service','基本建设工程预算编制和审核','','','','','','',NULL,NULL,'fa fa-th',NULL,0,0,0,'normal'),(109,107,'service','基本建设工程结算审核','','','','','','',NULL,NULL,'fa fa-th',NULL,0,0,0,'normal'),(110,107,'service','基本建设工程决算审核','','','','','','',NULL,NULL,'fa fa-th',NULL,0,0,0,'normal'),(111,107,'service','编制可行性研究报告','','','','','','',NULL,NULL,'fa fa-th',NULL,0,0,0,'normal'),(112,107,'service','工程造价全过程控制','','','','','','',NULL,NULL,'fa fa-th',NULL,0,0,0,'normal'),(113,20,'normal','公司介绍','','','','','','',NULL,'<p><span style=\"color: rgb(51, 51, 51); font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; background-color: rgb(255, 255, 255);\">由多名会计师、税务师发起成立，多数业务骨干从事会计、审计、税务工作超过10年，其中有多名有担任过企业财务总监、财务经理、税务经理、事务所审计经理、税务机关公务员经历。我们还有强大的财务专家团队，包括注册会计师、培训讲师，为有需要的客户提供增值服务指导。我们会争取定期召开服务会议，辅导企业发展过程中可能涉及财务、税务、产权及经济法律问题。</span></p>','fa fa-th',NULL,0,1522228392,0,'normal'),(114,20,'normal','联系我们','','','','','','',NULL,NULL,'fa fa-th',NULL,0,0,0,'normal');
-
-/*Table structure for table `fa_config` */
-
+-- ----------------------------
+-- Table structure for fa_config
+-- ----------------------------
 DROP TABLE IF EXISTS `fa_config`;
-
 CREATE TABLE `fa_config` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL DEFAULT '' COMMENT '变量名',
@@ -246,53 +312,35 @@ CREATE TABLE `fa_config` (
   `extend` varchar(255) NOT NULL DEFAULT '' COMMENT '扩展属性',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COMMENT='系统配置';
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COMMENT='系统配置';
 
-/*Data for the table `fa_config` */
+-- ----------------------------
+-- Records of fa_config
+-- ----------------------------
+BEGIN;
+INSERT INTO `fa_config` VALUES (1, 'name', 'basic', 'Site name', '请填写站点名称', 'string', 'FastAdmin', '', 'required', '');
+INSERT INTO `fa_config` VALUES (2, 'beian', 'basic', 'Beian', '粤ICP备15054802号-4', 'string', '', '', '', '');
+INSERT INTO `fa_config` VALUES (3, 'cdnurl', 'basic', 'Cdn url', '如果静态资源使用第三方云储存请配置该值', 'string', '', '', '', '');
+INSERT INTO `fa_config` VALUES (4, 'version', 'basic', 'Version', '如果静态资源有变动请重新配置该值', 'string', '1.0.1', '', 'required', '');
+INSERT INTO `fa_config` VALUES (5, 'timezone', 'basic', 'Timezone', '', 'string', 'Asia/Shanghai', '', 'required', '');
+INSERT INTO `fa_config` VALUES (6, 'forbiddenip', 'basic', 'Forbidden ip', '一行一条记录', 'text', '', '', '', '');
+INSERT INTO `fa_config` VALUES (7, 'languages', 'basic', 'Languages', '', 'array', '{\"backend\":\"zh-cn\",\"frontend\":\"zh-cn\"}', '', 'required', '');
+INSERT INTO `fa_config` VALUES (8, 'fixedpage', 'basic', 'Fixed page', '请尽量输入左侧菜单栏存在的链接', 'string', 'dashboard', '', 'required', '');
+INSERT INTO `fa_config` VALUES (9, 'categorytype', 'dictionary', 'Category type', '', 'array', '{\"default\":\"Default\",\"page\":\"Page\",\"article\":\"Article\",\"test\":\"Test\"}', '', '', '');
+INSERT INTO `fa_config` VALUES (10, 'configgroup', 'dictionary', 'Config group', '', 'array', '{\"basic\":\"Basic\",\"email\":\"Email\",\"dictionary\":\"Dictionary\",\"user\":\"User\",\"example\":\"Example\"}', '', '', '');
+INSERT INTO `fa_config` VALUES (11, 'mail_type', 'email', 'Mail type', '选择邮件发送方式', 'select', '1', '[\"Please select\",\"SMTP\",\"Mail\"]', '', '');
+INSERT INTO `fa_config` VALUES (12, 'mail_smtp_host', 'email', 'Mail smtp host', '错误的配置发送邮件会导致服务器超时', 'string', 'smtp.qq.com', '', '', '');
+INSERT INTO `fa_config` VALUES (13, 'mail_smtp_port', 'email', 'Mail smtp port', '(不加密默认25,SSL默认465,TLS默认587)', 'string', '465', '', '', '');
+INSERT INTO `fa_config` VALUES (14, 'mail_smtp_user', 'email', 'Mail smtp user', '（填写完整用户名）', 'string', '10000', '', '', '');
+INSERT INTO `fa_config` VALUES (15, 'mail_smtp_pass', 'email', 'Mail smtp password', '（填写您的密码）', 'string', 'password', '', '', '');
+INSERT INTO `fa_config` VALUES (16, 'mail_verify_type', 'email', 'Mail vertify type', '（SMTP验证方式[推荐SSL]）', 'select', '2', '[\"None\",\"TLS\",\"SSL\"]', '', '');
+INSERT INTO `fa_config` VALUES (17, 'mail_from', 'email', 'Mail from', '', 'string', '10000@qq.com', '', '', '');
+COMMIT;
 
-insert  into `fa_config`(`id`,`name`,`group`,`title`,`tip`,`type`,`value`,`content`,`rule`,`extend`) values (1,'name','basic','Site name','请填写站点名称','string','会计服务','','required',''),(2,'beian','basic','Beian','粤ICP备15054802号-4','string','皖ICP备15054802号-4','','',''),(3,'cdnurl','basic','Cdn url','如果静态资源使用第三方云储存请配置该值','string','','','',''),(4,'version','basic','Version','如果静态资源有变动请重新配置该值','string','1.0.1','','required',''),(5,'timezone','basic','Timezone','','string','Asia/Shanghai','','required',''),(6,'forbiddenip','basic','Forbidden ip','一行一条记录','text','','','',''),(7,'languages','basic','Languages','','array','{\"backend\":\"zh-cn\",\"frontend\":\"zh-cn\"}','','required',''),(8,'fixedpage','basic','Fixed page','请尽量输入左侧菜单栏存在的链接','string','general/profile','','required',''),(9,'categorytype','dictionary','Category type','','array','{\"normal\":\"普通\",\"service\":\"服务\",\"article\":\"文章\"}','','',''),(10,'configgroup','dictionary','Config group','','array','{\"basic\":\"Basic\",\"email\":\"Email\",\"dictionary\":\"Dictionary\",\"user\":\"User\",\"example\":\"Example\"}','','',''),(11,'mail_type','email','Mail type','选择邮件发送方式','select','1','[\"Please select\",\"SMTP\",\"Mail\"]','',''),(12,'mail_smtp_host','email','Mail smtp host','错误的配置发送邮件会导致服务器超时','string','smtp.qq.com','','',''),(13,'mail_smtp_port','email','Mail smtp port','(不加密默认25,SSL默认465,TLS默认587)','string','465','','',''),(14,'mail_smtp_user','email','Mail smtp user','（填写完整用户名）','string','10000','','',''),(15,'mail_smtp_pass','email','Mail smtp password','（填写您的密码）','string','password','','',''),(16,'mail_verify_type','email','Mail vertify type','（SMTP验证方式[推荐SSL]）','select','2','[\"None\",\"TLS\",\"SSL\"]','',''),(17,'mail_from','email','Mail from','','string','10000@qq.com','','',''),(18,'description','basic','分类通用简介','','string','专业服务，实惠便捷，用最高的效率最好的态度服务每一个客户','','',''),(19,'logo','basic','网站logo','','image','/uploads/20180329/6a69cbf3ffa9b0dcb862fe7cf4681025.jpg','','',''),(20,'wechat','basic','微信公众号二维码','','image','/uploads/20180329/a5165e10040e2e588e70c05106c7db25.jpg','','','');
-
-/*Table structure for table `fa_customer` */
-
-DROP TABLE IF EXISTS `fa_customer`;
-
-CREATE TABLE `fa_customer` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `name` varchar(50) NOT NULL COMMENT '名称',
-  `img` varchar(512) DEFAULT NULL COMMENT '图片',
-  `intro` varchar(512) DEFAULT NULL COMMENT '简介',
-  `url` varchar(512) NOT NULL DEFAULT ' ',
-  `createtime` int(10) DEFAULT NULL,
-  `updatetime` int(10) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='客户';
-
-/*Data for the table `fa_customer` */
-
-insert  into `fa_customer`(`id`,`name`,`img`,`intro`,`url`,`createtime`,`updatetime`) values (1,'中国邮政1','/uploads/20180323/6f45392660c295990c571d93fa321d1d.jpg','无','',1521790539,1522295116),(2,'中国邮政','/uploads/20180323/6f45392660c295990c571d93fa321d1d.jpg','','',1521790539,NULL),(3,'中国邮政','/uploads/20180323/6f45392660c295990c571d93fa321d1d.jpg',NULL,'',1521790539,NULL),(4,'中国邮政','/uploads/20180323/6f45392660c295990c571d93fa321d1d.jpg',NULL,'',1521790539,NULL),(5,'中国邮政','/uploads/20180323/6f45392660c295990c571d93fa321d1d.jpg',NULL,'',1521790539,NULL),(6,'中国邮政','/uploads/20180323/6f45392660c295990c571d93fa321d1d.jpg',NULL,'',1521790539,NULL),(7,'中国邮政','/uploads/20180323/6f45392660c295990c571d93fa321d1d.jpg',NULL,'',1521790539,NULL),(8,'中国邮政','/uploads/20180323/6f45392660c295990c571d93fa321d1d.jpg',NULL,'',1521790539,NULL),(9,'中国邮政','/uploads/20180323/6f45392660c295990c571d93fa321d1d.jpg',NULL,'',1521790539,NULL),(10,'中国邮政','/uploads/20180323/6f45392660c295990c571d93fa321d1d.jpg',NULL,'',1521790539,NULL),(11,'中国邮政','/uploads/20180323/6f45392660c295990c571d93fa321d1d.jpg',NULL,'',1521790539,NULL),(12,'中国邮政','/uploads/20180323/6f45392660c295990c571d93fa321d1d.jpg','','/',1521790539,1522290360);
-
-/*Table structure for table `fa_link` */
-
-DROP TABLE IF EXISTS `fa_link`;
-
-CREATE TABLE `fa_link` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `name` varchar(200) NOT NULL COMMENT '链接名称',
-  `url` varchar(512) DEFAULT NULL COMMENT '链接地址',
-  `status` tinyint(2) NOT NULL DEFAULT '1' COMMENT '状态',
-  `createtime` int(10) DEFAULT NULL COMMENT '创建时间',
-  `updatetime` int(10) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='友情链接';
-
-/*Data for the table `fa_link` */
-
-insert  into `fa_link`(`id`,`name`,`url`,`status`,`createtime`,`updatetime`) values (1,'中国会计协会','http://www.dddd.com',1,1521785018,1521785018),(2,'中华律师协会','',1,1521785035,1521785035);
-
-/*Table structure for table `fa_sms` */
-
+-- ----------------------------
+-- Table structure for fa_sms
+-- ----------------------------
 DROP TABLE IF EXISTS `fa_sms`;
-
 CREATE TABLE `fa_sms` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `event` varchar(30) NOT NULL DEFAULT '' COMMENT '事件',
@@ -302,14 +350,53 @@ CREATE TABLE `fa_sms` (
   `ip` varchar(30) NOT NULL DEFAULT '' COMMENT 'IP',
   `createtime` int(10) unsigned DEFAULT '0' COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='短信验证码表';
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='短信验证码表';
 
-/*Data for the table `fa_sms` */
+-- ----------------------------
+-- Table structure for fa_test
+-- ----------------------------
+DROP TABLE IF EXISTS `fa_test`;
+CREATE TABLE `fa_test` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `admin_id` int(10) NOT NULL DEFAULT '0' COMMENT '管理员ID',
+  `category_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分类ID(单选)',
+  `category_ids` varchar(100) NOT NULL COMMENT '分类ID(多选)',
+  `week` enum('monday','tuesday','wednesday') NOT NULL COMMENT '星期(单选):monday=星期一,tuesday=星期二,wednesday=星期三',
+  `flag` set('hot','index','recommend') NOT NULL DEFAULT '' COMMENT '标志(多选):hot=热门,index=首页,recommend=推荐',
+  `genderdata` enum('male','female') NOT NULL DEFAULT 'male' COMMENT '性别(单选):male=男,female=女',
+  `hobbydata` set('music','reading','swimming') NOT NULL COMMENT '爱好(多选):music=音乐,reading=读书,swimming=游泳',
+  `title` varchar(50) NOT NULL DEFAULT '' COMMENT '标题',
+  `content` text NOT NULL COMMENT '内容',
+  `image` varchar(100) NOT NULL DEFAULT '' COMMENT '图片',
+  `images` varchar(1500) NOT NULL DEFAULT '' COMMENT '图片组',
+  `attachfile` varchar(100) NOT NULL DEFAULT '' COMMENT '附件',
+  `keywords` varchar(100) NOT NULL DEFAULT '' COMMENT '关键字',
+  `description` varchar(255) NOT NULL DEFAULT '' COMMENT '描述',
+  `city` varchar(100) NOT NULL DEFAULT '' COMMENT '省市',
+  `price` float(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '价格',
+  `views` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '点击',
+  `startdate` date DEFAULT NULL COMMENT '开始日期',
+  `activitytime` datetime DEFAULT NULL COMMENT '活动时间(datetime)',
+  `year` year(4) DEFAULT NULL COMMENT '年',
+  `times` time DEFAULT NULL COMMENT '时间',
+  `refreshtime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '刷新时间(int)',
+  `createtime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `updatetime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+  `weigh` int(10) NOT NULL DEFAULT '0' COMMENT '权重',
+  `switch` tinyint(1) NOT NULL DEFAULT '0' COMMENT '开关',
+  `status` enum('normal','hidden') NOT NULL DEFAULT 'normal' COMMENT '状态',
+  `state` enum('0','1','2') NOT NULL DEFAULT '1' COMMENT '状态值:0=禁用,1=正常,2=推荐',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='测试表';
 
-/*Table structure for table `fa_user` */
+-- ----------------------------
+-- Records of fa_test
+-- ----------------------------
+BEGIN;
+INSERT INTO `fa_test` VALUES (1, 0, 12, '12,13', 'monday', 'hot,index', 'male', 'music,reading', '我是一篇测试文章', '<p>我是测试内容</p>', '/assets/img/avatar.png', '/assets/img/avatar.png,/assets/img/qrcode.png', '/assets/img/avatar.png', '关键字', '描述', '广西壮族自治区/百色市/平果县', 0.00, 0, '2017-07-10', '2017-07-10 18:24:45', 2017, '18:24:45', 1499682285, 1499682526, 1499682526, 0, 1, 'normal', '1');
+COMMIT;
 
 DROP TABLE IF EXISTS `fa_user`;
-
 CREATE TABLE `fa_user` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `group_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '组别ID',
@@ -344,14 +431,11 @@ CREATE TABLE `fa_user` (
   KEY `mobile` (`mobile`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='会员表';
 
-/*Data for the table `fa_user` */
-
-insert  into `fa_user`(`id`,`group_id`,`username`,`nickname`,`password`,`salt`,`email`,`mobile`,`avatar`,`level`,`gender`,`birthday`,`bio`,`score`,`successions`,`maxsuccessions`,`prevtime`,`logintime`,`loginip`,`loginfailure`,`joinip`,`jointime`,`createtime`,`updatetime`,`token`,`status`,`verification`) values (1,1,'admin','admin','c13f62012fd6a8fdf06b3452a94430e5','rpR6Bv','admin@163.com','13888888888','/assets/img/avatar.png',0,0,'2017-04-15','',0,1,1,1516170492,1516171614,'127.0.0.1',0,'127.0.0.1',1491461418,0,1516171614,'','normal','');
-
-/*Table structure for table `fa_user_group` */
+BEGIN;
+INSERT INTO `fa_user` VALUES (1, 1, 'admin', 'admin', 'c13f62012fd6a8fdf06b3452a94430e5', 'rpR6Bv', 'admin@163.com', '13888888888', '/assets/img/avatar.png', 0, 0, '2017-04-15', '', 0, 1, 1, 1516170492, 1516171614, '127.0.0.1', 0, '127.0.0.1', 1491461418, 0, 1516171614, '', 'normal','');
+COMMIT;
 
 DROP TABLE IF EXISTS `fa_user_group`;
-
 CREATE TABLE `fa_user_group` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT '' COMMENT '组名',
@@ -362,14 +446,11 @@ CREATE TABLE `fa_user_group` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='会员组表';
 
-/*Data for the table `fa_user_group` */
-
-insert  into `fa_user_group`(`id`,`name`,`rules`,`createtime`,`updatetime`,`status`) values (1,'默认组','1,2,3,4,5,6,7,8,9,10,11,12',1515386468,1516168298,'normal');
-
-/*Table structure for table `fa_user_rule` */
+BEGIN;
+INSERT INTO `fa_user_group` VALUES (1, '默认组', '1,2,3,4,5,6,7,8,9,10,11,12', 1515386468, 1516168298, 'normal');
+COMMIT;
 
 DROP TABLE IF EXISTS `fa_user_rule`;
-
 CREATE TABLE `fa_user_rule` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `pid` int(10) DEFAULT NULL COMMENT '父ID',
@@ -384,14 +465,22 @@ CREATE TABLE `fa_user_rule` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='会员规则表';
 
-/*Data for the table `fa_user_rule` */
-
-insert  into `fa_user_rule`(`id`,`pid`,`name`,`title`,`remark`,`ismenu`,`createtime`,`updatetime`,`weigh`,`status`) values (1,0,'index','前台','',1,1516168079,1516168079,1,'normal'),(2,0,'api','API接口','',1,1516168062,1516168062,2,'normal'),(3,1,'user','会员模块','',1,1515386221,1516168103,12,'normal'),(4,2,'user','会员模块','',1,1515386221,1516168092,11,'normal'),(5,3,'index/user/login','登录','',0,1515386247,1515386247,5,'normal'),(6,3,'index/user/register','注册','',0,1515386262,1516015236,7,'normal'),(7,3,'index/user/index','会员中心','',0,1516015012,1516015012,9,'normal'),(8,3,'index/user/profile','个人资料','',0,1516015012,1516015012,4,'normal'),(9,4,'api/user/login','登录','',0,1515386247,1515386247,6,'normal'),(10,4,'api/user/register','注册','',0,1515386262,1516015236,8,'normal'),(11,4,'api/user/index','会员中心','',0,1516015012,1516015012,10,'normal'),(12,4,'api/user/profile','个人资料','',0,1516015012,1516015012,3,'normal');
-
-/*Table structure for table `fa_user_score_log` */
+BEGIN;
+INSERT INTO `fa_user_rule` VALUES (1, 0, 'index', '前台', '', 1, 1516168079, 1516168079, 1, 'normal');
+INSERT INTO `fa_user_rule` VALUES (2, 0, 'api', 'API接口', '', 1, 1516168062, 1516168062, 2, 'normal');
+INSERT INTO `fa_user_rule` VALUES (3, 1, 'user', '会员模块', '', 1, 1515386221, 1516168103, 12, 'normal');
+INSERT INTO `fa_user_rule` VALUES (4, 2, 'user', '会员模块', '', 1, 1515386221, 1516168092, 11, 'normal');
+INSERT INTO `fa_user_rule` VALUES (5, 3, 'index/user/login', '登录', '', 0, 1515386247, 1515386247, 5, 'normal');
+INSERT INTO `fa_user_rule` VALUES (6, 3, 'index/user/register', '注册', '', 0, 1515386262, 1516015236, 7, 'normal');
+INSERT INTO `fa_user_rule` VALUES (7, 3, 'index/user/index', '会员中心', '', 0, 1516015012, 1516015012, 9, 'normal');
+INSERT INTO `fa_user_rule` VALUES (8, 3, 'index/user/profile', '个人资料', '', 0, 1516015012, 1516015012, 4, 'normal');
+INSERT INTO `fa_user_rule` VALUES (9, 4, 'api/user/login', '登录', '', 0, 1515386247, 1515386247, 6, 'normal');
+INSERT INTO `fa_user_rule` VALUES (10, 4, 'api/user/register', '注册', '', 0, 1515386262, 1516015236, 8, 'normal');
+INSERT INTO `fa_user_rule` VALUES (11, 4, 'api/user/index', '会员中心', '', 0, 1516015012, 1516015012, 10, 'normal');
+INSERT INTO `fa_user_rule` VALUES (12, 4, 'api/user/profile', '个人资料', '', 0, 1516015012, 1516015012, 3, 'normal');
+COMMIT;
 
 DROP TABLE IF EXISTS `fa_user_score_log`;
-
 CREATE TABLE `fa_user_score_log` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '会员ID',
@@ -401,14 +490,9 @@ CREATE TABLE `fa_user_score_log` (
   `memo` varchar(255) NOT NULL DEFAULT '' COMMENT '备注',
   `createtime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='会员积分变动表';
-
-/*Data for the table `fa_user_score_log` */
-
-/*Table structure for table `fa_user_token` */
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='会员积分变动表';
 
 DROP TABLE IF EXISTS `fa_user_token`;
-
 CREATE TABLE `fa_user_token` (
   `token` varchar(50) NOT NULL COMMENT 'Token',
   `user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '会员ID',
@@ -417,9 +501,89 @@ CREATE TABLE `fa_user_token` (
   PRIMARY KEY (`token`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='会员Token表';
 
-/*Data for the table `fa_user_token` */
+SET FOREIGN_KEY_CHECKS = 1;
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+/*Table structure for table `fa_article` */
+
+DROP TABLE IF EXISTS `fa_article`;
+
+CREATE TABLE `fa_article` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `category_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分类ID(单选)',
+  `title` varchar(100) NOT NULL DEFAULT '' COMMENT '标题',
+  `content` text NOT NULL COMMENT '内容',
+  `keywords` varchar(100) NOT NULL DEFAULT '' COMMENT '关键字',
+  `description` varchar(255) NOT NULL DEFAULT '' COMMENT '描述概述摘要',
+  `image` varchar(100) NOT NULL DEFAULT '' COMMENT '封面图片',
+  `flag` set('hot','index','recommend','new') NOT NULL DEFAULT '' COMMENT '标志(多选):hot=热门,index=首页,recommend=推荐,new=最新',
+  `views` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '浏览次数',
+  `publishtime` datetime NOT NULL COMMENT '发布时间(datetime)',
+  `createtime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `updatetime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+  `weigh` int(10) NOT NULL DEFAULT '0' COMMENT '权重排序',
+  `status` enum('normal','hidden') NOT NULL DEFAULT 'normal' COMMENT '状态',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='文章管理表';
+
+DROP TABLE IF EXISTS `fa_article`;
+
+CREATE TABLE `fa_article` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `category_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分类ID(单选)',
+  `title` varchar(100) NOT NULL DEFAULT '' COMMENT '标题',
+  `content` text NOT NULL COMMENT '内容',
+  `keywords` varchar(100) NOT NULL DEFAULT '' COMMENT '关键字',
+  `description` varchar(255) NOT NULL DEFAULT '' COMMENT '描述概述摘要',
+  `image` varchar(100) NOT NULL DEFAULT '' COMMENT '封面图片',
+  `flag` set('hot','index','recommend','new') NOT NULL DEFAULT '' COMMENT '标志(多选):hot=热门,index=首页,recommend=推荐,new=最新',
+  `views` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '浏览次数',
+  `publishtime` datetime NOT NULL COMMENT '发布时间(datetime)',
+  `createtime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `updatetime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+  `weigh` int(10) NOT NULL DEFAULT '0' COMMENT '权重排序',
+  `status` enum('normal','hidden') NOT NULL DEFAULT 'normal' COMMENT '状态',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='文章管理表';
+
+/*Table structure for table `fa_banner` */
+
+DROP TABLE IF EXISTS `fa_banner`;
+
+CREATE TABLE `fa_banner` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `img` varchar(512) NOT NULL COMMENT '图片',
+  `category_id` int(10) NOT NULL DEFAULT '0' COMMENT '所属分类',
+  `status` tinyint(2) NOT NULL DEFAULT '1' COMMENT '状态',
+  `createtime` int(10) DEFAULT NULL COMMENT '创建时间',
+  `updatetime` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='轮播图';
+
+/*Table structure for table `fa_customer` */
+
+DROP TABLE IF EXISTS `fa_customer`;
+
+CREATE TABLE `fa_customer` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `name` varchar(50) NOT NULL COMMENT '名称',
+  `img` varchar(512) DEFAULT NULL COMMENT '图片',
+  `intro` varchar(512) DEFAULT NULL COMMENT '简介',
+  `url` varchar(512) NOT NULL DEFAULT ' ',
+  `createtime` int(10) DEFAULT NULL,
+  `updatetime` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='客户';
+
+/*Table structure for table `fa_link` */
+
+DROP TABLE IF EXISTS `fa_link`;
+
+CREATE TABLE `fa_link` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `name` varchar(200) NOT NULL COMMENT '链接名称',
+  `url` varchar(512) DEFAULT NULL COMMENT '链接地址',
+  `status` tinyint(2) NOT NULL DEFAULT '1' COMMENT '状态',
+  `createtime` int(10) DEFAULT NULL COMMENT '创建时间',
+  `updatetime` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='友情链接';
