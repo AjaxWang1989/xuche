@@ -160,7 +160,7 @@ if (!$errInfo && isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD']
         if($result) {
             exit('install ok');
         }else{
-            exit('install failed');
+            exit('install failed'.$pdo->errorInfo());
         }
 
         $config = @file_get_contents($dbConfigFile);
