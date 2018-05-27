@@ -1207,14 +1207,16 @@ class Route
      */
     public static function parseUrl($url, $depr = '/', $autoSearch = false)
     {
-
+        //Log::log('module '.self::$bind['module']);
         if (isset(self::$bind['module'])) {
             $bind = str_replace('/', $depr, self::$bind['module']);
             // 如果有模块/控制器绑定
             $url = $bind . ('.' != substr($bind, -1) ? $depr : '') . ltrim($url, $depr);
         }
         $url              = str_replace($depr, '|', $url);
+        Log::log('url '.$url);
         list($path, $var) = self::parseUrlPath($url);
+        Log::log('path '.json_encode($path));
         $route            = [null, null, null];
         if (isset($path)) {
             // 解析模块

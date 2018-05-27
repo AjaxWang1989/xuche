@@ -76,6 +76,7 @@ class App
      */
     public static function run(Request $request = null)
     {
+        Log::log('server'.$_SERVER['REQUEST_URI']);
         $request = is_null($request) ? Request::instance() : $request;
 
         try {
@@ -110,7 +111,7 @@ class App
             Hook::listen('app_dispatch', self::$dispatch);
             // 获取应用调度信息
             $dispatch = self::$dispatch;
-
+            Log::log('dispatch '.json_encode($dispatch));
             // 未设置调度信息则进行 URL 路由检测
             if (empty($dispatch)) {
                 $dispatch = self::routeCheck($request, $config);
@@ -298,6 +299,7 @@ class App
      */
     public static function dispatch($dispatch, $type = 'module')
     {
+        Log::log('dispatch type '. $type);
         self::$dispatch = ['type' => $type, $type => $dispatch];
     }
 
@@ -552,7 +554,7 @@ class App
         // 获取控制器名
         $controller = strip_tags($result[1] ?: $config['default_controller']);
         $controller = $convert ? strtolower($controller) : $controller;
-
+        Log::log('controller '.$controller);
         // 获取操作名
         $actionName = strip_tags($result[2] ?: $config['default_action']);
         $actionName = $convert ? strtolower($actionName) : $actionName;
@@ -608,9 +610,10 @@ class App
         $path   = $request->path();
         $depr   = $config['pathinfo_depr'];
         $result = false;
-
+Log::log('path1 '.$path);
         // 路由检测
         $check = !is_null(self::$routeCheck) ? self::$routeCheck : $config['url_route_on'];
+        Log::log('check route '.($check ? 'ok' : 'false'));
         if ($check) {
             // 开启路由
             if (is_file(RUNTIME_PATH . 'route.php')) {
@@ -637,7 +640,7 @@ class App
                 throw new RouteNotFoundException();
             }
         }
-
+Log::log('path '.$path);
         // 路由无效 解析模块/控制器/操作/参数... 支持控制器自动搜索
         if (false === $result) {
             $result = Route::parseUrl($path, $depr, $config['controller_auto_search']);

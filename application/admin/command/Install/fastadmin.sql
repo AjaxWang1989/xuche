@@ -2,7 +2,8 @@
 SQLyog Ultimate v8.32 
 MySQL - 5.5.53 : Database - food
 *********************************************************************
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
@@ -40,7 +41,7 @@ CREATE TABLE `fa_admin` (
 
 /*Data for the table `fa_admin` */
 
-insert  into `fa_admin`(`id`,`username`,`nickname`,`password`,`salt`,`avatar`,`email`,`loginfailure`,`logintime`,`createtime`,`updatetime`,`token`,`status`) values (1,'admin','Admin','a7be97908d782b029853a14c76db5795','Pk5OKX','/assets/img/avatar.png','admin@admin.com',0,1522294349,1492186163,1522295072,'','normal'),(2,'admin2','admin2','9a28ce07ce875fbd14172a9ca5357d3c','2dHDmj','/assets/img/avatar.png','admin2@fastadmin.net',0,1505450906,1492186163,1505450906,'df45fdd5-26f4-45ca-83b3-47e4491a315a','normal'),(3,'admin3','admin3','1c11f945dfcd808a130a8c2a8753fe62','WOKJEn','/assets/img/avatar.png','admin3@fastadmin.net',0,1501980868,1492186201,1501982377,'','normal'),(4,'admin22','admin22','1c1a0aa0c3c56a8c1a908aab94519648','Aybcn5','/assets/img/avatar.png','admin22@fastadmin.net',0,0,1492186240,1492186240,'','normal'),(5,'admin32','admin32','ade94d5d7a7033afa7d84ac3066d0a02','FvYK0u','/assets/img/avatar.png','admin32@fastadmin.net',0,0,1492186263,1492186263,'','normal'),(6,'tsadmin','nimo','2202f27ab951701b26cec969875a0a8b','Wr1QaZ','/assets/img/avatar.png','130999@qq.com',0,1522295324,1522294992,1522295324,'59607730-234d-41ab-b0e1-3a903180c5cd','normal');
+-- insert  into `fa_admin`(`id`,`username`,`nickname`,`password`,`salt`,`avatar`,`email`,`loginfailure`,`logintime`,`createtime`,`updatetime`,`token`,`status`) values (1,'admin','Admin','a7be97908d782b029853a14c76db5795','Pk5OKX','/assets/img/avatar.png','admin@admin.com',0,1522294349,1492186163,1522295072,'','normal'),(2,'admin2','admin2','9a28ce07ce875fbd14172a9ca5357d3c','2dHDmj','/assets/img/avatar.png','admin2@fastadmin.net',0,1505450906,1492186163,1505450906,'df45fdd5-26f4-45ca-83b3-47e4491a315a','normal'),(3,'admin3','admin3','1c11f945dfcd808a130a8c2a8753fe62','WOKJEn','/assets/img/avatar.png','admin3@fastadmin.net',0,1501980868,1492186201,1501982377,'','normal'),(4,'admin22','admin22','1c1a0aa0c3c56a8c1a908aab94519648','Aybcn5','/assets/img/avatar.png','admin22@fastadmin.net',0,0,1492186240,1492186240,'','normal'),(5,'admin32','admin32','ade94d5d7a7033afa7d84ac3066d0a02','FvYK0u','/assets/img/avatar.png','admin32@fastadmin.net',0,0,1492186263,1492186263,'','normal'),(6,'tsadmin','nimo','2202f27ab951701b26cec969875a0a8b','Wr1QaZ','/assets/img/avatar.png','130999@qq.com',0,1522295324,1522294992,1522295324,'59607730-234d-41ab-b0e1-3a903180c5cd','normal');
 
 /*Table structure for table `fa_admin_log` */
 

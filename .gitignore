@@ -14,4 +14,4 @@ runtime/
 public/uploads/
 public/ueditor/
 public/assets/region/
-application/extra/site.php
+#application/extra/site.php

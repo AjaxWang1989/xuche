@@ -6,6 +6,7 @@ use app\admin\model\AdminLog;
 use app\common\controller\Backend;
 use think\Config;
 use think\Hook;
+use think\Log;
 use think\Validate;
 
 /**
