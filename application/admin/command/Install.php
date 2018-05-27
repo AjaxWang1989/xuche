@@ -66,9 +66,9 @@ class Install extends Command
         $result = Db::getPdo()->exec($sql);
 
         if($result) {
-            Log::log('install ok');
+            exit('install ok');
         }else{
-            Log::log('install failed');
+            exit('install failed');
         }
 
         file_put_contents($installLockFile, 1);
