@@ -156,7 +156,7 @@ if (!$errInfo && isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD']
 
         $pdo->query("USE `{$mysqlDatabase}`");
 
-        $pdo->exec($sql);
+        $result = $pdo->exec($sql);
         if($result) {
             //exit('install ok');
         }else{
