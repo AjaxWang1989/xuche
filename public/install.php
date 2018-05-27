@@ -156,12 +156,7 @@ if (!$errInfo && isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD']
 
         $pdo->query("USE `{$mysqlDatabase}`");
 
-        $result = $pdo->exec($sql);
-        if($result) {
-            //exit('install ok');
-        }else{
-            die(print_r([$pdo->errorCode(), $pdo->errorInfo(), $sql], true));
-        }
+        $pdo->exec($sql);
 
         $config = @file_get_contents($dbConfigFile);
         $callback = function($matches) use($mysqlHostname, $mysqlHostport, $mysqlUsername, $mysqlPassword, $mysqlDatabase, $mysqlPrefix) {
