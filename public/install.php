@@ -158,9 +158,9 @@ if (!$errInfo && isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD']
 
         $pdo->exec($sql);
         if($result) {
-            exit('install ok');
+            //exit('install ok');
         }else{
-            exit('install failed'.$pdo->errorInfo());
+            exit('install failed : '.$pdo->errorInfo());
         }
 
         $config = @file_get_contents($dbConfigFile);
