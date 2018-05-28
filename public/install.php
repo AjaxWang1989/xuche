@@ -184,7 +184,7 @@ if (!$errInfo && isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD']
         }
         $newSalt = substr(md5(uniqid(true)), 0, 6);
         $newPassword = md5(md5($adminPassword) . $newSalt);
-        \think\Log::log('password '.$adminPassword.' md5 '.$newPassword);
+        //\think\Log::log('password '.$adminPassword.' md5 '.$newPassword);
         $pdo->query("UPDATE {$mysqlPrefix}admin SET username = '{$adminUsername}', email = '{$adminEmail}',password = '{$newPassword}', salt = '{$newSalt}' WHERE username = 'admin'");
 
         echo "success";
