@@ -44,11 +44,11 @@ class Auth extends \fast\Auth
             $this->setError('Username is incorrect');
             return false;
         }
-        if ($admin->loginfailure >= 3 && time() - $admin->updatetime < 86400)
-        {
-            $this->setError('Please try again after 1 day');
-            return false;
-        }
+//        if ($admin->loginfailure >= 3 && time() - $admin->updatetime < 86400)
+//        {
+//            $this->setError('Please try again after 1 day');
+//            return false;
+//        }
         if ($admin->password != md5(md5($password) . $admin->salt))
         {
             $admin->loginfailure++;
